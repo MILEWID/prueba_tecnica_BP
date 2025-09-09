@@ -9,6 +9,7 @@ import { Reportes } from './components/reportes/reportes';
 import { TopBar } from './components/top-bar/top-bar';
 import { Footer } from './components/footer/footer';
 import { CommonModule } from '@angular/common';
+
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, Sidebar, Header, ClientsCard, Cuentas, Movimientos, Reportes, TopBar, Footer, CommonModule],
@@ -19,11 +20,13 @@ export class App {
   @ViewChild(Sidebar) sidebar!: Sidebar;
   protected readonly title = signal('Clientes');
   protected readonly section = signal('clientes');
+
   onSectionChange(section: string) {
     this.section.set(section);
     const map: Record<string,string> = { clientes: 'Clientes', cuentas: 'Cuentas', movimientos: 'Movimientos', reportes: 'Reportes' };
     this.title.set(map[section] ?? 'App');
   }
+
   onMobileMenuToggle() {
     this.sidebar?.toggleMobileMenu();
   }

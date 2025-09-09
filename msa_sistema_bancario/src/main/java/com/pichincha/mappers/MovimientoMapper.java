@@ -29,6 +29,7 @@ public interface MovimientoMapper {
     @Mapping(target = "saldoInicial", source = "saldoInicial")
     @Mapping(target = "saldo", source = "saldoDisponible")
     @Mapping(target = "estado", source = "estado")
+    @Mapping(target = "tipoMovimiento", expression = "java(dto.getMovimiento() >= 0 ? \"Credito\" : \"Debito\")")
     Movimiento toEntity(MovimientoDTO dto);
 
     default Cuenta cuentaFromNumeroCuenta(String numeroCuenta) {

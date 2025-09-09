@@ -1,0 +1,27 @@
+.page-header {
+  padding: 2rem 2rem 0 2rem; // Padding superior + horizontal, alineación con content__body
+  
+  @media (max-width: 768px) {
+    padding: 1rem 1rem 0 1rem; // Padding superior + horizontal responsive
+  }
+  
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  &__title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1f2937; // Usar color directo en lugar de CSS variable
+    margin: 0;
+  }
+  
+  &__subtitle {
+    font-size: 1rem;
+    color: #6b7280; // Usar color directo
+    margin: 0;
+    opacity: 0.8;
+  }
+}

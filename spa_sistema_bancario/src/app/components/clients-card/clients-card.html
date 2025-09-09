@@ -1,12 +1,12 @@
 <div *ngIf="error()" class="alert alert--error">
-  <span class="alert__icon">⚠️</span>
+  <span class="alert__icon"><i class="material-icons">warning</i></span>
   <span class="alert__message">{{ error() }}</span>
-  <button class="alert__close" (click)="clearMessages()">✕</button>
+  <button class="alert__close" (click)="clearMessages()"><i class="material-icons">close</i></button>
 </div>
 <div *ngIf="successMessage()" class="alert alert--success">
-  <span class="alert__icon">✅</span>
+  <span class="alert__icon"><i class="material-icons">check_circle</i></span>
   <span class="alert__message">{{ successMessage() }}</span>
-  <button class="alert__close" (click)="clearMessages()">✕</button>
+  <button class="alert__close" (click)="clearMessages()"><i class="material-icons">close</i></button>
 </div>
 <section class="card">
   <div class="card__header">
@@ -26,7 +26,7 @@
           (click)="clearSearch()"
           title="Limpiar búsqueda"
         >
-          ✕
+          <i class="material-icons">close</i>
         </button>
       </div>
       <button 
@@ -34,7 +34,7 @@
         (click)="openCreateModal()"
         [disabled]="isLoading()"
       >
-        <span class="btn__icon">➕</span>
+        <i class="material-icons">person_add</i>
         Agregar Cliente
       </button>
     </div>
@@ -43,7 +43,7 @@
     <div class="loading__spinner"></div>
     <span>Cargando clientes...</span>
   </div>
-  <div *ngIf="!isLoading()" class="table-container">
+  <div *ngIf="!isLoading()" class="table-container enhanced-table">
     <table class="data-table" *ngIf="filteredClients().length > 0">
       <thead class="data-table__header">
         <tr>
@@ -70,7 +70,7 @@
                 (click)="openEditModal(client)"
                 [disabled]="isLoading()"
               >
-                ✏️
+                <i class="material-icons">edit</i>
               </button>
               <button 
                 class="action-btn action-btn--delete" 
@@ -78,7 +78,7 @@
                 (click)="openDeleteModal(client)"
                 [disabled]="isLoading()"
               >
-                🗑️
+                <i class="material-icons">delete</i>
               </button>
             </div>
           </td>
@@ -86,21 +86,13 @@
       </tbody>
     </table>
     <div class="empty-state" *ngIf="filteredClients().length === 0 && !isLoading()">
-      <div class="empty-state__icon">👥</div>
+      <div class="empty-state__icon"><i class="material-icons">group</i></div>
       <div class="empty-state__title">
         {{ searchTerm() ? 'No se encontraron clientes' : 'No hay clientes registrados' }}
       </div>
       <div class="empty-state__description">
         {{ searchTerm() ? 'Intenta con otros términos de búsqueda' : 'Comienza agregando tu primer cliente' }}
       </div>
-      <button 
-        *ngIf="!searchTerm()" 
-        class="btn btn--primary"
-        (click)="openCreateModal()"
-      >
-        <span class="btn__icon">➕</span>
-        Agregar Primer Cliente
-      </button>
     </div>
   </div>
 </section>
@@ -136,7 +128,7 @@
   (close)="closeDeleteModal()"
 >
   <div class="delete-confirmation">
-    <div class="delete-confirmation__icon">⚠️</div>
+    <div class="delete-confirmation__icon"><i class="material-icons">warning</i></div>
     <div class="delete-confirmation__content">
       <p class="delete-confirmation__text">
         ¿Está seguro que desea eliminar al cliente?

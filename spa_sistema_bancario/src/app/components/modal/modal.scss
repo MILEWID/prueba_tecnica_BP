@@ -1,7 +1,8 @@
-$modal-z-index: 2000;
+$modal-z-index: 9999;
 $modal-backdrop-color: rgba(0, 0, 0, 0.5);
 $modal-border-radius: 12px;
 $modal-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+
 .modal-backdrop {
   position: fixed;
   top: 0;
@@ -27,11 +28,15 @@ $modal-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   flex-direction: column;
   position: relative;
   animation: slideIn 0.3s ease-out;
+  width: auto;
+  min-width: 320px;
+  
   @media (max-width: 768px) {
     margin: 0.5rem;
     max-height: 95vh;
-    width: 100%;
+    width: calc(100% - 1rem);
     max-width: none;
+    min-width: auto;
   }
 }
 .modal__dialog--small {
@@ -75,6 +80,12 @@ $modal-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   padding: 0.25rem;
   border-radius: 4px;
   transition: all 0.2s ease;
+  
+  .material-icons {
+    font-size: 24px;
+    color: inherit;
+  }
+  
   &:hover {
     background: #f3f4f6;
     color: #111827;
@@ -144,6 +155,8 @@ $modal-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   }
   .modal__dialog {
     border-radius: 8px;
+    min-width: auto;
+    width: calc(100% - 1rem);
   }
   .modal__header {
     padding: 0.75rem 1rem 0.5rem 1rem;
@@ -156,5 +169,24 @@ $modal-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   }
   .modal__footer {
     padding: 0.5rem 1rem 0.75rem 1rem;
+  }
+}
+
+// Estilos adicionales para mejorar la funcionalidad
+.modal__dialog.modal--loading {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+// Fix para contenido customizado
+.modal__body > * {
+  max-width: 100%;
+}
+
+// Mejora para dispositivos táctiles
+@media (hover: none) and (pointer: coarse) {
+  .modal__close-button {
+    padding: 0.5rem;
+    font-size: 1.25rem;
   }
 }

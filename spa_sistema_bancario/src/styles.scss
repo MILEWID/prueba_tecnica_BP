@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 /* Import all global styles from app.scss */
-@import './app/app.scss';
+@use './app/app.scss';
 
 /* Additional global styles for components that need them */
 
@@ -37,6 +37,11 @@
 .alert__icon {
   margin-right: 0.75rem;
   font-size: 1.125rem;
+  
+  .material-icons {
+    font-size: 1.125rem;
+    color: inherit;
+  }
 }
 
 .alert__message {
@@ -53,6 +58,11 @@
   margin-left: 0.5rem;
   opacity: 0.7;
   transition: opacity 0.2s ease;
+  
+  .material-icons {
+    font-size: 1.125rem;
+    color: inherit;
+  }
   
   &:hover {
     opacity: 1;
