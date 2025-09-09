@@ -9,8 +9,6 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 @Data
 public class Cliente extends Persona {
-    @Column(unique = true)
-    private String clienteId;
     private String contrasena;
     private Boolean estado;
 }

@@ -11,7 +11,6 @@ public interface ClienteMapper {
     ClienteMapper INSTANCE = Mappers.getMapper(ClienteMapper.class);
 
     @Mapping(target = "id", source = "id")
-    @Mapping(target = "clienteId", source = "clienteId")
     @Mapping(target = "contrasena", source = "contrasena")
     @Mapping(target = "estado", source = "estado")
     @Mapping(target = "nombre", source = "nombre")
@@ -23,7 +22,6 @@ public interface ClienteMapper {
     ClienteDTO toDto(Cliente entity);
 
     @Mapping(target = "id", source = "id")
-    @Mapping(target = "clienteId", source = "clienteId")
     @Mapping(target = "contrasena", source = "contrasena")
     @Mapping(target = "estado", source = "estado")
     @Mapping(target = "nombre", source = "nombre")

@@ -14,6 +14,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/movimientos")
+@CrossOrigin(origins = {"http://localhost:4200", "http://127.0.0.1:4200"})
 public class MovimientoController {
     private final MovimientoUseCase movimientoUseCase;
     private final MovimientoMapper movimientoMapper;

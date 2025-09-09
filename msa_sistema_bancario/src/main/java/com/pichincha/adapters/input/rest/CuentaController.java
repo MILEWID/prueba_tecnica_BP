@@ -13,6 +13,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/cuentas")
+@CrossOrigin(origins = {"http://localhost:4200", "http://127.0.0.1:4200"})
 public class CuentaController {
     private final CuentaUseCase cuentaUseCase;
     private final CuentaMapper cuentaMapper;

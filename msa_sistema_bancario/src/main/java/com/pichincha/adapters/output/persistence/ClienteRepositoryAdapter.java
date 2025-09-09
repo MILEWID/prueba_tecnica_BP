@@ -28,11 +28,6 @@ public class ClienteRepositoryAdapter implements ClienteRepositoryPort {
     }
     
     @Override
-    public Optional<Cliente> findByClienteId(String clienteId) {
-        return clienteRepository.findByClienteId(clienteId);
-    }
-    
-    @Override
     public Optional<Cliente> findByIdentificacion(String identificacion) {
         return clienteRepository.findByIdentificacion(identificacion);
     }

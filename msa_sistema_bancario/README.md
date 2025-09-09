@@ -22,6 +22,7 @@ Sistema bancario desarrollado con **Arquitectura Hexagonal (Ports & Adapters)** 
 - ✅ **Validaciones** con Bean Validation
 - ✅ **Mapeo automático** con MapStruct
 - ✅ **Manejo centralizado de excepciones**
+- ✅ **Identificación única** por cédula/identificación (sin clienteId redundante)
 
 ## 🏗️ Arquitectura Hexagonal Implementada
 
@@ -259,6 +260,6 @@ Ver la colección Postman incluida en el repositorio para ejemplos de cada endpo
 
 ### Identificación de Cliente
 Para las operaciones que requieren identificación de cliente, usar el valor único "123456":
-- Crear cuenta: `clienteId: "123456"`
+- Crear cuenta: `clienteIdentificacion: "123456"`
 - Buscar cuentas: `GET /api/cuentas/cliente/123456`
 - Generar reportes: `identificacion=123456`

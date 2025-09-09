@@ -11,7 +11,6 @@ import java.util.UUID;
 
 @Where(clause = "estado = true")
 public interface ClienteRepository extends JpaRepository<Cliente, UUID> {
-    Optional<Cliente> findByClienteId(String clienteId);
     Optional<Cliente> findByIdentificacion(String identificacion);
 
     @Modifying

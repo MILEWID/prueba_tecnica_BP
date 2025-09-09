@@ -13,7 +13,6 @@ CREATE TABLE persona (
 CREATE TABLE cliente (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     persona_id UUID REFERENCES persona(id),
-    clienteid VARCHAR(20) UNIQUE,
     contrasena VARCHAR(100),
     estado BOOLEAN
 );

@@ -15,11 +15,6 @@ public class ClienteDTO {
     @Schema(description = "ID único del cliente", example = "123e4567-e89b-12d3-a456-426614174000")
     private UUID id;
     
-    @NotBlank(message = "El ID del cliente es obligatorio")
-    @Size(min = 3, max = 20, message = "El ID del cliente debe tener entre 3 y 20 caracteres")
-    @Schema(description = "Identificador único del cliente", example = "CLI001", required = true)
-    private String clienteId;
-    
     @NotBlank(message = "La contraseña es obligatoria")
     @Size(min = 6, message = "La contraseña debe tener al menos 6 caracteres")
     @Schema(description = "Contraseña del cliente", example = "password123", required = true)

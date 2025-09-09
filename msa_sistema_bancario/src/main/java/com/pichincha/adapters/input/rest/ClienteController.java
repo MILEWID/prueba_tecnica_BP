@@ -19,6 +19,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/clientes")
+@CrossOrigin(origins = {"http://localhost:4200", "http://127.0.0.1:4200"})
 @Tag(name = "Clientes", description = "Operaciones de gestión de clientes bancarios")
 public class ClienteController {
     private final ClienteUseCase clienteUseCase;
