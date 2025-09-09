@@ -1,0 +1,46 @@
+<div 
+  *ngIf="isOpen" 
+  class="modal-backdrop" 
+  (click)="onBackdropClick()"
+  [@fadeIn]
+>
+  <div 
+    class="modal__dialog" 
+    [class]="getModalSizeClass()" 
+    [class.custom-modal]="config.customClass"
+    (click)="$event.stopPropagation()"
+    [@slideIn]
+  >
+    <div class="modal__header">
+      <h2 class="modal__title">{{ config.title }}</h2>
+      <button 
+        *ngIf="config.showCloseButton" 
+        class="modal__close-button" 
+        (click)="onClose()"
+        aria-label="Cerrar modal"
+      >
+        ✕
+      </button>
+    </div>
+    <div class="modal__body">
+      <ng-content></ng-content>
+    </div>
+    <div *ngIf="config.showFooter" class="modal__footer">
+      <ng-content select="[slot=footer]"></ng-content>
+      <div *ngIf="!hasCustomFooter()" class="modal__footer-buttons">
+        <button 
+          class="btn btn--outline" 
+          (click)="onCancel()"
+        >
+          Cancelar
+        </button>
+        <button 
+          class="btn btn--primary" 
+          (click)="onConfirm()"
+        >
+          Confirmar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

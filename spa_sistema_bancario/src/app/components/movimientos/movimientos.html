@@ -1,0 +1,58 @@
+<section class="card">
+  <table class="data-table">
+    <thead class="data-table__header">
+      <tr>
+        <th>Fecha</th>
+        <th>Cuenta</th>
+        <th>Cliente</th>
+        <th>Tipo</th>
+        <th>Valor</th>
+        <th>Saldo</th>
+        <th>Estado</th>
+      </tr>
+    </thead>
+    <tbody class="data-table__body">
+      <tr *ngFor="let movimiento of movimientos">
+        <td class="font-semibold">{{ movimiento.fecha | date:'dd/MM/yyyy' }}</td>
+        <td>{{ movimiento.cuenta }}</td>
+        <td>{{ movimiento.cliente }}</td>
+        <td>
+          <span 
+            class="badge" 
+            [ngClass]="{
+              'badge--success': movimiento.tipo === 'Deposito',
+              'badge--warning': movimiento.tipo === 'Retiro'
+            }">
+            {{ movimiento.tipo }}
+          </span>
+        </td>
+        <td class="text-right font-semibold" 
+            [ngClass]="{
+              'text-green-600': movimiento.valor > 0,
+              'text-red-600': movimiento.valor < 0
+            }">
+          {{ movimiento.valor | currency:'USD':'symbol':'1.2-2' }}
+        </td>
+        <td class="text-right font-semibold">{{ movimiento.saldo | currency:'USD':'symbol':'1.2-2' }}</td>
+        <td>
+          <span 
+            class="badge" 
+            [ngClass]="{
+              'badge--success': movimiento.estado === 'completado',
+              'badge--warning': movimiento.estado === 'pendiente',
+              'badge--danger': movimiento.estado === 'fallido'
+            }">
+            {{ movimiento.estado }}
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="empty-state" *ngIf="movimientos.length === 0">
+    <div class="empty-state__icon">💸</div>
+    <div class="empty-state__title">No hay movimientos registrados</div>
+    <div class="empty-state__description">
+      Los movimientos de las cuentas aparecerán aquí
+    </div>
+  </div>
+</section>

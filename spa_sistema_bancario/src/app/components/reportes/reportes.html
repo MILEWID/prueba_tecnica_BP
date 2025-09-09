@@ -1,0 +1,82 @@
+<section class="card">
+  <div class="card__title">Estado de Cuenta</div>
+  <div class="card__subtitle">Generar reportes del estado de cuenta por cliente y fechas</div>
+  <div class="report-filters">
+    <div class="filter-group">
+      <label class="filter-label">Cliente:</label>
+      <select class="filter-select">
+        <option value="">Seleccionar cliente</option>
+        <option value="jose-lema">Jose Lema</option>
+        <option value="marianela-montalvo">Marianela Montalvo</option>
+        <option value="juan-osorio">Juan Osorio</option>
+        <option value="montserrat-sanchez">Montserrat Sanchez</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label class="filter-label">Fecha desde:</label>
+      <input type="date" class="filter-input" value="2023-02-01">
+    </div>
+    <div class="filter-group">
+      <label class="filter-label">Fecha hasta:</label>
+      <input type="date" class="filter-input" value="2023-02-28">
+    </div>
+    <button class="btn btn--primary">Generar Reporte</button>
+  </div>
+  <div class="report-results" *ngIf="reporteGenerado">
+    <div class="report-summary">
+      <div class="summary-card">
+        <div class="summary-title">Total Ingresos</div>
+        <div class="summary-value text-green-600">+$1,175.00</div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-title">Total Egresos</div>
+        <div class="summary-value text-red-600">-$2,540.00</div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-title">Saldo Final</div>
+        <div class="summary-value font-bold">$5,000.00</div>
+      </div>
+    </div>
+    <table class="data-table">
+      <thead class="data-table__header">
+        <tr>
+          <th>Fecha</th>
+          <th>Descripción</th>
+          <th>Tipo</th>
+          <th>Valor</th>
+          <th>Saldo</th>
+        </tr>
+      </thead>
+      <tbody class="data-table__body">
+        <tr *ngFor="let item of reporteDetalle">
+          <td>{{ item.fecha | date:'dd/MM/yyyy' }}</td>
+          <td>{{ item.descripcion }}</td>
+          <td>
+            <span class="badge" 
+                  [ngClass]="{
+                    'badge--success': item.tipo === 'Deposito',
+                    'badge--warning': item.tipo === 'Retiro'
+                  }">
+              {{ item.tipo }}
+            </span>
+          </td>
+          <td class="text-right font-semibold"
+              [ngClass]="{
+                'text-green-600': item.valor > 0,
+                'text-red-600': item.valor < 0
+              }">
+            {{ item.valor | currency:'USD':'symbol':'1.2-2' }}
+          </td>
+          <td class="text-right font-semibold">{{ item.saldo | currency:'USD':'symbol':'1.2-2' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="empty-state" *ngIf="!reporteGenerado">
+    <div class="empty-state__icon">📊</div>
+    <div class="empty-state__title">Genera tu primer reporte</div>
+    <div class="empty-state__description">
+      Selecciona un cliente y el rango de fechas para generar el estado de cuenta
+    </div>
+  </div>
+</section>

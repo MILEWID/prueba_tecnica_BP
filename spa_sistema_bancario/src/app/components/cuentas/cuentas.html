@@ -1,0 +1,50 @@
+<section class="card">
+  <table class="data-table">
+    <thead class="data-table__header">
+      <tr>
+        <th>Número de Cuenta</th>
+        <th>Cliente</th>
+        <th>Tipo</th>
+        <th>Saldo</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody class="data-table__body">
+      <tr *ngFor="let cuenta of cuentas">
+        <td class="font-semibold">{{ cuenta.numero }}</td>
+        <td>{{ cuenta.cliente }}</td>
+        <td>{{ cuenta.tipo }}</td>
+        <td class="text-right font-semibold">{{ cuenta.saldo | currency:'USD':'symbol':'1.2-2' }}</td>
+        <td>
+          <span 
+            class="badge" 
+            [ngClass]="{
+              'badge--success': cuenta.estado === 'activa',
+              'badge--warning': cuenta.estado === 'pendiente',
+              'badge--danger': cuenta.estado === 'cerrada'
+            }">
+            {{ cuenta.estado }}
+          </span>
+        </td>
+        <td>
+          <div class="table-actions">
+            <button class="action-btn action-btn--edit" title="Editar cuenta">
+              ✏️
+            </button>
+            <button class="action-btn action-btn--delete" title="Cerrar cuenta">
+              🗑️
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="empty-state" *ngIf="cuentas.length === 0">
+    <div class="empty-state__icon">💳</div>
+    <div class="empty-state__title">No hay cuentas disponibles</div>
+    <div class="empty-state__description">
+      Las cuentas de los clientes aparecerán aquí
+    </div>
+  </div>
+</section>
