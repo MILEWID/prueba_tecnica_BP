@@ -88,9 +88,9 @@ export class Movimientos implements OnInit {
     }
 
     const filtered = this.movimientos().filter((movimiento: MovimientoDTO) => 
-      movimiento.numeroCuenta.toLowerCase().includes(term) ||
-      (movimiento.cliente && movimiento.cliente.toLowerCase().includes(term)) ||
-      movimiento.movimiento.toString().includes(term)
+      movimiento.cuenta.numeroCuenta.toLowerCase().includes(term) ||
+      (movimiento.cuenta.clienteIdentificacion && movimiento.cuenta.clienteIdentificacion.toLowerCase().includes(term)) ||
+      movimiento.valor.toString().includes(term)
     );
     this.filteredMovimientos.set(filtered);
   }

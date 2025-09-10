@@ -1,59 +1,66 @@
-# SpaSistemaBancario
+# SpaSistemaBancario (Frontend)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.2.2.
+Sistema bancario SPA desarrollado en Angular 20.2.2. Permite la gestión de clientes, cuentas y movimientos bancarios, así como la generación de reportes y exportación en PDF. El frontend consume una API REST y está diseñado para ser escalable, mantenible y fácil de usar.
 
-## Development server
+## Estructura de carpetas principal
 
-To start a local development server, run:
+- `src/app/components/`: Componentes reutilizables (formularios, modales, barra lateral, etc.)
+- `src/app/models/`: Interfaces TypeScript para tipado fuerte (Cliente, Cuenta, Movimiento)
+- `src/app/pages/`: Vistas principales (Clientes, Cuentas, Movimientos, Reportes)
+- `src/app/services/`: Servicios para comunicación con la API REST
+- `src/app/app.*`: Configuración y bootstrap de la aplicación
 
-```bash
-ng serve
-```
+## Instalación y ejecución
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+1. Instala dependencias:
+   ```bash
+   npm install
+   ```
+2. Ejecuta el servidor de desarrollo:
+   ```bash
+   ng serve
+   ```
+3. Accede a la app en [http://localhost:4200](http://localhost:4200)
 
-## Code scaffolding
+## Funcionalidades principales
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- **Clientes:** Alta, edición y listado de clientes.
+- **Cuentas:** Creación y gestión de cuentas bancarias asociadas a clientes.
+- **Movimientos:** Registro de depósitos/retiros, consulta de historial, eliminación de movimientos.
+- **Reportes:** Generación de reportes filtrados por cliente y rango de fechas, exportación a PDF.
 
-```bash
-ng generate component component-name
-```
+## Buenas prácticas implementadas
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+- Tipado estricto con interfaces y DTOs.
+- Componentes desacoplados y reutilizables.
+- Servicios centralizados para acceso a datos.
+- Manejo de estados y mensajes de error/success reactivos.
+- Validaciones de formularios y feedback visual.
+- Uso de Angular Signals para gestión eficiente de estado.
+- Estilos modulares y responsivos (SCSS).
 
-```bash
-ng generate --help
-```
+## Testing
 
-## Building
+- Unit tests con Jest y Angular Testing Utilities.
+- E2E tests recomendados (no incluidos por defecto).
 
-To build the project run:
+## Recomendaciones para desarrollo
 
-```bash
-ng build
-```
+- Usa `ng generate` para crear nuevos componentes, servicios, etc.
+- Mantén la lógica de negocio en los servicios y la presentación en los componentes.
+- Revisa los modelos en `src/app/models/` antes de consumir/crear datos.
+- Para nuevas integraciones, sigue el patrón de servicios y tipado estricto.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## Integración con backend
 
-## Running unit tests
+- El frontend espera una API REST en `http://localhost:8081/api/`.
+- Revisa los DTOs y endpoints en el backend para asegurar compatibilidad.
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## Recursos útiles
 
-```bash
-ng test
-```
+- [Angular CLI Reference](https://angular.dev/tools/cli)
+- [Angular Signals](https://angular.dev/reference/signals)
+- [Jest Testing](https://jestjs.io/)
 
-## Running end-to-end tests
+---
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.

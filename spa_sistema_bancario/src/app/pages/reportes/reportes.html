@@ -171,14 +171,14 @@
               <td class="font-semibold col-date">{{ formatDate(movimiento.fecha) }}</td>
               <td class="col-account">
                 <div class="account-info">
-                  <span class="account-number">{{ movimiento.numeroCuenta }}</span>
+                  <span class="account-number">{{ movimiento.cuenta.numeroCuenta }}</span>
                 </div>
               </td>
               <td class="col-type">
                 <span 
                   class="badge movement-badge" 
-                  [ngClass]="getMovimientoTypeClass(movimiento.movimiento)">
-                  {{ getMovimientoTypeIcon(movimiento.movimiento) }} {{ getMovimientoType(movimiento.movimiento) }}
+                  [ngClass]="getMovimientoTypeClass(movimiento.valor)">
+                  {{ getMovimientoTypeIcon(movimiento.valor) }} {{ getMovimientoType(movimiento.valor) }}
                 </span>
               </td>
               <td class="text-right font-semibold col-initial">
@@ -186,15 +186,15 @@
               </td>
               <td class="text-right font-semibold col-movement"
                   [ngClass]="{
-                    'text-green-600': movimiento.movimiento > 0,
-                    'text-red-600': movimiento.movimiento < 0
+                    'text-green-600': movimiento.valor > 0,
+                    'text-red-600': movimiento.valor < 0
                   }">
                 <span class="movement-amount">
-                  {{ movimiento.movimiento | currency:'USD':'symbol':'1.2-2' }}
+                  {{ movimiento.valor | currency:'USD':'symbol':'1.2-2' }}
                 </span>
               </td>
               <td class="text-right font-semibold col-final highlight-balance">
-                {{ movimiento.saldoDisponible | currency:'USD':'symbol':'1.2-2' }}
+                {{ movimiento.saldo | currency:'USD':'symbol':'1.2-2' }}
               </td>
             </tr>
           </tbody>

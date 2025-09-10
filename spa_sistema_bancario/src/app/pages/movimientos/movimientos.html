@@ -65,24 +65,21 @@
       <tbody class="data-table__body">
         <tr *ngFor="let movimiento of filteredMovimientos(); trackBy: trackByMovimientoId">
           <td class="font-semibold">{{ formatDate(movimiento.fecha) }}</td>
-          <td>{{ movimiento.numeroCuenta }}</td>
-          <td>{{ movimiento.cliente || 'N/A' }}</td>
+          <td>{{ movimiento.cuenta.numeroCuenta }}</td>
+          <td>{{ movimiento.cuenta.clienteIdentificacion || 'N/A' }}</td>
           <td>
             <span 
               class="badge" 
               [ngClass]="{
-                'badge--success': movimiento.movimiento >= 0,
-                'badge--warning': movimiento.movimiento < 0
+                'badge--success': movimiento.valor >= 0,
+                'badge--warning': movimiento.valor < 0
               }">
-              {{ getMovimientoType(movimiento.movimiento) }}
+              {{ getMovimientoType(movimiento.valor) }}
             </span>
           </td>
           <td class="text-right font-semibold">{{ movimiento.saldoInicial | currency:'USD':'symbol':'1.2-2' }}</td>
-          <td class="text-right font-semibold" 
-              [ngClass]="getMovimientoTypeClass(movimiento.movimiento)">
-            {{ movimiento.movimiento | currency:'USD':'symbol':'1.2-2' }}
-          </td>
-          <td class="text-right font-semibold">{{ movimiento.saldoDisponible | currency:'USD':'symbol':'1.2-2' }}</td>
+          <td class="text-right font-semibold">{{ movimiento.valor | currency:'USD':'symbol':'1.2-2' }}</td>
+          <td class="text-right font-semibold">{{ movimiento.saldo | currency:'USD':'symbol':'1.2-2' }}</td>
           <td>
             <span 
               class="badge" 

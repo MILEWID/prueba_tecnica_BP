@@ -137,12 +137,12 @@ export class Reportes implements OnInit {
     let saldoFinal = 0;
 
     movimientos.forEach((movimiento) => {
-      if (movimiento.movimiento > 0) {
-        totalIngresos += movimiento.movimiento;
+      if (movimiento.valor > 0) {
+        totalIngresos += movimiento.valor;
       } else {
-        totalEgresos += Math.abs(movimiento.movimiento);
+        totalEgresos += Math.abs(movimiento.valor);
       }
-      saldoFinal = movimiento.saldoDisponible;
+      saldoFinal = movimiento.saldo;
     });
 
     this.resumenReporte.set({
