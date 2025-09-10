@@ -1,5 +1,7 @@
 # 🏦 MSA Sistema Bancario - Arquitectura Hexagonal
 
+> ⚠️ **Nota:** El nombre de la imagen Docker y el puerto expuesto deben coincidir con el README general del proyecto. Usa `msa-sistema-bancario:latest` y el puerto `8081` para evitar confusiones.
+
 [![Java](https://img.shields.io/badge/Java-17-orange.svg)](https://openjdk.java.net/projects/jdk/17/)
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.2.0-brightgreen.svg)](https://spring.io/projects/spring-boot)
 [![Gradle](https://img.shields.io/badge/Gradle-8.4-blue.svg)](https://gradle.org)
@@ -154,30 +156,53 @@ src/main/java/com/pichincha/
 
 ### Dockerfile Optimizado
 ```dockerfile
-FROM openjdk:17-jdk-slim
-VOLUME /tmp
-COPY build/libs/*.jar app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]
+# Stage 1: Build
+FROM amazoncorretto:17-alpine-jdk AS builder
+WORKDIR /app
+COPY . .
+RUN chmod +x ./gradlew
+RUN ./gradlew build -x test
+
+# Stage 2: Runtime
+FROM amazoncorretto:17-alpine
+WORKDIR /app
+RUN apk add --no-cache curl
+COPY --from=builder /app/build/libs/msa_sistema_bancario-*.jar app.jar
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+RUN chown -R appuser:appgroup /app
+USER appuser
 EXPOSE 8081
+ENV SPRING_PROFILES_ACTIVE=docker
+HEALTHCHECK --interval=30s --timeout=3s --start-period=40s --retries=3 \
+    CMD curl -f http://localhost:8081/actuator/health || exit 1
+ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./urandom", "-Xmx512m", "-Xms256m", "-jar", "app.jar"]
 ```
 
 ### Comandos de Despliegue
 ```bash
-# 1. Construir el proyecto
+# 1. Construir el proyecto (desde la raíz del repo)
+cd msa_sistema_bancario
 ./gradlew clean build
 
-# 2. Construir imagen Docker
+# 2. Construir imagen Docker (desde la raíz del repo)
 docker build -t msa-sistema-bancario:latest .
 
 # 3. Ejecutar contenedor
+# (Por defecto, la app está configurada para conectarse a la base de datos remota definida en application.properties)
+# Si quieres usar la base remota:
 docker run -p 8081:8081 \
-  -e SPRING_DATASOURCE_URL=jdbc:postgresql://host.docker.internal:5432/bancario \
-  -e SPRING_DATASOURCE_USERNAME=postgres \
-  -e SPRING_DATASOURCE_PASSWORD=password \
+  -e SPRING_DATASOURCE_URL=jdbc:postgresql://postgresql-arquitecturaut.alwaysdata.net:5432/arquitecturaut_bdd_accounts \
+  -e SPRING_DATASOURCE_USERNAME=arquitecturaut_us \
+  -e SPRING_DATASOURCE_PASSWORD=Caramelo200 \
   msa-sistema-bancario:latest
 
-# 4. Verificar funcionamiento
-curl http://localhost:8081/swagger-ui.html
+# Si quieres usar una base local, cambia las variables de entorno:
+# Ejemplo para desarrollo local:
+# docker run -p 8081:8081 \
+#   -e SPRING_DATASOURCE_URL=jdbc:postgresql://host.docker.internal:5432/bancario \
+#   -e SPRING_DATASOURCE_USERNAME=postgres \
+#   -e SPRING_DATASOURCE_PASSWORD=password \
+#   msa-sistema-bancario:latest
 ```
 
 ## 📚 API REST - Endpoints Principales

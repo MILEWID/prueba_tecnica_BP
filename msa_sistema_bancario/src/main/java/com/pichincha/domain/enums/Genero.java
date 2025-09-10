@@ -1,19 +1,14 @@
 package com.pichincha.domain.enums;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.pichincha.infrastructure.config.converters.GeneroDeserializer;
-import com.pichincha.infrastructure.config.converters.GeneroSerializer;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-@JsonSerialize(using = GeneroSerializer.class)
-@JsonDeserialize(using = GeneroDeserializer.class)
 public enum Genero {
-    MASCULINO("M"),
-    FEMENINO("F");
+    MASCULINO("Masculino"),
+    FEMENINO("Femenino"),
+    OTRO("Otro");
 
     private final String codigo;
 

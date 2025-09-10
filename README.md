@@ -78,11 +78,23 @@ cd msa_sistema_bancario
 
 **Con Docker:**
 ```bash
-# Construir la imagen
-docker build -t sistema-bancario-api .
+# Navegar al directorio del backend
+cd msa_sistema_bancario
+
+# Compilar el proyecto
+./gradlew clean build
+
+# Construir la imagen Docker
+# (Ejecuta este comando dentro de msa_sistema_bancario)
+docker build -t msa-sistema-bancario:latest .
 
 # Ejecutar el contenedor
-docker run -p 8080:8080 sistema-bancario-api
+# (Asegúrate de que la base de datos esté disponible en el puerto 5432)
+docker run -p 8081:8081 \
+  -e SPRING_DATASOURCE_URL=jdbc:postgresql://host.docker.internal:5432/bancario \
+  -e SPRING_DATASOURCE_USERNAME=postgres \
+  -e SPRING_DATASOURCE_PASSWORD=password \
+  msa-sistema-bancario:latest
 ```
 
 ### 2. Frontend (SPA)

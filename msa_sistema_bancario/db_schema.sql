@@ -24,7 +24,9 @@ CREATE TABLE cuenta (
     numero_cuenta VARCHAR(20) UNIQUE,
     tipo_cuenta VARCHAR(20),
     saldo_inicial NUMERIC(15,2),
-    estado BOOLEAN
+    estado BOOLEAN,
+    cliente_nombre VARCHAR(100), -- Para compatibilidad con DTO
+    cliente_identificacion VARCHAR(20) -- Para compatibilidad con DTO
 );
 
 -- Tabla Movimiento
