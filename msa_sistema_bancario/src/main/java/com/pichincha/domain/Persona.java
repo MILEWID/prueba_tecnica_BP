@@ -2,6 +2,7 @@ package com.pichincha.domain;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import com.pichincha.domain.enums.Genero;
 import java.util.UUID;
 
 @Entity
@@ -12,7 +13,10 @@ public class Persona {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String nombre;
-    private String genero;
+    
+    @Enumerated(EnumType.STRING)
+    private Genero genero;
+    
     private Integer edad;
     @Column(unique = true)
     private String identificacion;
