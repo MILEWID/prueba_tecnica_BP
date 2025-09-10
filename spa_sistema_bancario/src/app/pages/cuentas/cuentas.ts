@@ -1,10 +1,10 @@
-import { Component, OnInit, ViewChild, Input, signal, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild, signal, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Cuenta, CuentaRequest } from '../../models/cuenta.interface';
 import { CuentaService } from '../../services/cuenta.service';
-import { Modal } from '../modal/modal';
-import { CuentaForm } from '../cuenta-form/cuenta-form';
+import { Modal } from '../../components/modal/modal';
+import { CuentaForm } from '../../components/cuenta-form/cuenta-form';
 
 interface ModalConfig {
   title: string;
@@ -24,7 +24,6 @@ interface ModalConfig {
   encapsulation: ViewEncapsulation.None
 })
 export class Cuentas implements OnInit {
-  @Input() section: string = '';
   @ViewChild('createCuentaForm') createCuentaForm!: CuentaForm;
   @ViewChild('editCuentaForm') editCuentaForm!: CuentaForm;
 

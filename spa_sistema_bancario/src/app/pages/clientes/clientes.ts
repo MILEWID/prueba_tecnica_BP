@@ -1,10 +1,10 @@
-import { Component, OnInit, ViewChild, Input, signal, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild, signal, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Client, ClientRequest } from '../../models/client.interface';
 import { ClientService } from '../../services/client';
-import { Modal } from '../modal/modal';
-import { ClientForm } from '../client-form/client-form';
+import { Modal } from '../../components/modal/modal';
+import { ClientForm } from '../../components/client-form/client-form';
 interface ModalConfig {
   title: string;
   size?: 'small' | 'medium' | 'large';
@@ -14,15 +14,14 @@ interface ModalConfig {
   customClass?: string;
 }
 @Component({
-  selector: 'app-clients-card',
+  selector: 'app-clientes',
   standalone: true,
   imports: [CommonModule, FormsModule, Modal, ClientForm],
-  templateUrl: './clients-card.html',
-  styleUrl: './clients-card.scss',
+  templateUrl: './clientes.html',
+  styleUrl: './clientes.scss',
   encapsulation: ViewEncapsulation.None
 })
-export class ClientsCard implements OnInit {
-  @Input() section: string = '';
+export class Clientes implements OnInit {
   @ViewChild('createClientForm') createClientForm!: ClientForm;
   @ViewChild('editClientForm') editClientForm!: ClientForm;
   protected clients = signal<Client[]>([]);

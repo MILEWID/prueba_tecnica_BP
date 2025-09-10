@@ -1,10 +1,10 @@
-import { Component, OnInit, ViewChild, Input, signal, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild, signal, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MovimientoDTO, MovimientoRequest } from '../../models/movimiento.interface';
 import { MovimientoService } from '../../services/movimiento.service';
-import { Modal } from '../modal/modal';
-import { MovimientoForm } from '../movimiento-form/movimiento-form';
+import { Modal } from '../../components/modal/modal';
+import { MovimientoForm } from '../../components/movimiento-form/movimiento-form';
 
 interface ModalConfig {
   title: string;
@@ -24,7 +24,6 @@ interface ModalConfig {
   encapsulation: ViewEncapsulation.None
 })
 export class Movimientos implements OnInit {
-  @Input() section: string = '';
   @ViewChild('movimientoForm') movimientoForm!: MovimientoForm;
 
   protected movimientos = signal<MovimientoDTO[]>([]);

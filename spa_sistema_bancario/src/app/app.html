@@ -5,21 +5,9 @@
     <div class="app__content content">
       <app-header [title]="title()"></app-header>
       <section class="content__body">
-        <ng-container *ngIf="section() === 'clientes'">
-          <app-clients-card [section]="section()"></app-clients-card>
-        </ng-container>
-        <ng-container *ngIf="section() === 'cuentas'">
-          <app-cuentas></app-cuentas>
-        </ng-container>
-        <ng-container *ngIf="section() === 'movimientos'">
-          <app-movimientos></app-movimientos>
-        </ng-container>
-        <ng-container *ngIf="section() === 'reportes'">
-          <app-reportes></app-reportes>
-        </ng-container>
+        <router-outlet></router-outlet>
       </section>
       <app-footer></app-footer>
     </div>
   </div>
 </div>
-<router-outlet></router-outlet>

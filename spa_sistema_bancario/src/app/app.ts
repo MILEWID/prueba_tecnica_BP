@@ -1,18 +1,15 @@
 import { Component, signal, ViewChild } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
 import { Sidebar } from './components/sidebar/sidebar';
 import { Header } from './components/header/header';
-import { ClientsCard } from './components/clients-card/clients-card';
-import { Cuentas } from './components/cuentas/cuentas';
-import { Movimientos } from './components/movimientos/movimientos';
-import { Reportes } from './components/reportes/reportes';
 import { TopBar } from './components/top-bar/top-bar';
 import { Footer } from './components/footer/footer';
 import { CommonModule } from '@angular/common';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Sidebar, Header, ClientsCard, Cuentas, Movimientos, Reportes, TopBar, Footer, CommonModule],
+  imports: [RouterOutlet, Sidebar, Header, TopBar, Footer, CommonModule],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
@@ -21,10 +18,25 @@ export class App {
   protected readonly title = signal('Clientes');
   protected readonly section = signal('clientes');
 
+  constructor(private router: Router) {
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe((event: NavigationEnd) => {
+      const path = event.url.replace('/', '');
+      const currentSection = path || 'clientes';
+      this.section.set(currentSection);
+      const titleMap: Record<string,string> = { 
+        clientes: 'Clientes', 
+        cuentas: 'Cuentas', 
+        movimientos: 'Movimientos', 
+        reportes: 'Reportes' 
+      };
+      this.title.set(titleMap[currentSection] ?? 'Sistema Bancario');
+    });
+  }
+
   onSectionChange(section: string) {
-    this.section.set(section);
-    const map: Record<string,string> = { clientes: 'Clientes', cuentas: 'Cuentas', movimientos: 'Movimientos', reportes: 'Reportes' };
-    this.title.set(map[section] ?? 'App');
+    this.router.navigate([`/${section}`]);
   }
 
   onMobileMenuToggle() {
