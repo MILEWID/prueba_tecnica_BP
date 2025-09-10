@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Sidebar } from './sidebar';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { of } from 'rxjs';
 
 describe('Sidebar', () => {
   let component: Sidebar;
@@ -8,13 +10,15 @@ describe('Sidebar', () => {
 
   beforeEach(async () => {
     const mockRouter = {
-      navigate: jest.fn()
+      navigate: jest.fn(),
+      events: of({}) // mock observable
     };
 
     await TestBed.configureTestingModule({
-      imports: [Sidebar],
+      imports: [Sidebar, HttpClientTestingModule],
       providers: [
-        { provide: Router, useValue: mockRouter }
+        { provide: Router, useValue: mockRouter },
+        { provide: ActivatedRoute, useValue: {} }
       ]
     }).compileComponents();
 
