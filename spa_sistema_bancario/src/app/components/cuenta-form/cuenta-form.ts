@@ -49,7 +49,7 @@ export class CuentaForm implements OnInit, OnChanges {
       ]],
       numeroCuenta: ['', [
         Validators.required,
-        Validators.minLength(6),
+        Validators.minLength(9),
         Validators.maxLength(10),
         Validators.pattern(/^[0-9]+$/)
       ]],

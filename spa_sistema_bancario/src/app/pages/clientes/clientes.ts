@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, signal, ViewEncapsulation } from '@angula
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Client, ClientRequest } from '../../models/client.interface';
-import { ClientService } from '../../services/client';
+import { ClientService } from '../../services/client.service';
 import { Modal } from '../../components/modal/modal';
 import { ClientForm } from '../../components/client-form/client-form';
 interface ModalConfig {
@@ -24,27 +24,27 @@ interface ModalConfig {
 export class Clientes implements OnInit {
   @ViewChild('createClientForm') createClientForm!: ClientForm;
   @ViewChild('editClientForm') editClientForm!: ClientForm;
-  protected clients = signal<Client[]>([]);
-  protected filteredClients = signal<Client[]>([]);
-  protected searchTerm = signal<string>('');
-  protected isLoading = signal<boolean>(false);
-  protected error = signal<string>('');
-  protected successMessage = signal<string>('');
-  protected isCreateModalOpen = signal<boolean>(false);
-  protected isEditModalOpen = signal<boolean>(false);
-  protected isDeleteModalOpen = signal<boolean>(false);
-  protected selectedClient = signal<Client | null>(null);
-  protected readonly createModalConfig: ModalConfig = {
+  clients = signal<Client[]>([]);
+  filteredClients = signal<Client[]>([]);
+  searchTerm = signal<string>('');
+  isLoading = signal<boolean>(false);
+  error = signal<string>('');
+  successMessage = signal<string>('');
+  isCreateModalOpen = signal<boolean>(false);
+  isEditModalOpen = signal<boolean>(false);
+  isDeleteModalOpen = signal<boolean>(false);
+  selectedClient = signal<Client | null>(null);
+  readonly createModalConfig: ModalConfig = {
     title: 'Agregar Nuevo Cliente',
     showFooter: false,
     showCloseButton: true
   };
-  protected readonly editModalConfig: ModalConfig = {
+  readonly editModalConfig: ModalConfig = {
     title: 'Editar Cliente',
     showFooter: false,
     showCloseButton: true
   };
-  protected readonly deleteModalConfig: ModalConfig = {
+  readonly deleteModalConfig: ModalConfig = {
     title: 'Confirmar Eliminación',
     showFooter: true,
     showCloseButton: true,
@@ -65,11 +65,11 @@ export class Clientes implements OnInit {
       }
     });
   }
-  protected onSearchChange(term: string): void {
+  onSearchChange(term: string): void {
     this.searchTerm.set(term);
     this.filterClients();
   }
-  protected clearSearch(): void {
+  clearSearch(): void {
     this.searchTerm.set('');
     this.filterClients();
   }
@@ -86,29 +86,29 @@ export class Clientes implements OnInit {
     );
     this.filteredClients.set(filtered);
   }
-  protected openCreateModal(): void {
+  openCreateModal(): void {
     this.isCreateModalOpen.set(true);
   }
-  protected closeCreateModal(): void {
+  closeCreateModal(): void {
     this.isCreateModalOpen.set(false);
   }
-  protected openEditModal(client: Client): void {
+  openEditModal(client: Client): void {
     this.selectedClient.set(client);
     this.isEditModalOpen.set(true);
   }
-  protected closeEditModal(): void {
+  closeEditModal(): void {
     this.isEditModalOpen.set(false);
     this.selectedClient.set(null);
   }
-  protected openDeleteModal(client: Client): void {
+  openDeleteModal(client: Client): void {
     this.selectedClient.set(client);
     this.isDeleteModalOpen.set(true);
   }
-  protected closeDeleteModal(): void {
+  closeDeleteModal(): void {
     this.isDeleteModalOpen.set(false);
     this.selectedClient.set(null);
   }
-  protected onCreateClient(clientData: ClientRequest): void {
+  onCreateClient(clientData: ClientRequest): void {
     this.clientService.createClient(clientData).subscribe({
       next: (newClient: Client) => {
         this.successMessage.set('Cliente creado exitosamente');
@@ -126,7 +126,7 @@ export class Clientes implements OnInit {
       }
     });
   }
-  protected onEditClient(clientData: ClientRequest): void {
+  onEditClient(clientData: ClientRequest): void {
     const client = this.selectedClient();
     if (!client?.id) return;
     this.clientService.updateClient(client.id, clientData).subscribe({
@@ -146,7 +146,7 @@ export class Clientes implements OnInit {
       }
     });
   }
-  protected confirmDelete(): void {
+  confirmDelete(): void {
     const client = this.selectedClient();
     if (!client?.id) return;
     this.clientService.deleteClient(client.id).subscribe({

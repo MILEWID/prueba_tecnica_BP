@@ -61,8 +61,8 @@
       </thead>
       <tbody class="data-table__body">
         <tr *ngFor="let cuenta of filteredCuentas(); trackBy: trackByCuentaId">
-          <td class="font-semibold">{{ cuenta.numeroCuenta }}</td>
-          <td>{{ cuenta.clienteNombre || 'N/A' }}</td>
+          <td class="font-semibold">{{ cuenta.numeroCuenta}}</td>
+          <td>{{ cuenta.clienteIdentificacion || 'N/A' }}</td>
           <td>{{ cuenta.tipoCuenta }}</td>
           <td class="text-right font-semibold">{{ cuenta.saldoInicial | currency:'USD':'symbol':'1.2-2' }}</td>
           <td>
@@ -148,29 +148,12 @@
     <div class="delete-confirmation__icon"><i class="material-icons">warning</i></div>
     <div class="delete-confirmation__content">
       <p class="delete-confirmation__text">
-        ¿Está seguro que desea eliminar la cuenta?
-      </p>
-      <div class="delete-confirmation__details" *ngIf="selectedCuenta()">
-        <strong>{{ selectedCuenta()!.numeroCuenta }}</strong><br>
-        <span class="text-muted">Cliente: {{ selectedCuenta()!.clienteNombre || 'N/A' }}</span>
-      </div>
-      <p class="delete-confirmation__warning">
-        Esta acción no se puede deshacer.
+        ¿Eliminar cuenta?
       </p>
     </div>
   </div>
   <div slot="footer" class="modal__footer-buttons">
-    <button 
-      class="btn btn--outline" 
-      (click)="closeDeleteModal()"
-    >
-      Cancelar
-    </button>
-    <button 
-      class="btn btn--primary delete-btn" 
-      (click)="confirmDelete()"
-    >
-      Eliminar
-    </button>
+    <button class="btn btn--outline" (click)="closeDeleteModal()">Cancelar</button>
+    <button class="btn btn--primary delete-btn" (click)="confirmDelete()">Eliminar</button>
   </div>
 </app-modal>

@@ -34,6 +34,7 @@ $primary-dark: #ffcc00;
 .delete-btn {
   background-color: #dc3545 !important;
   border-color: #dc3545 !important;
+  transition: background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   &:hover {
     background-color: #c82333 !important;
     border-color: #bd2130 !important;
@@ -47,7 +48,11 @@ $primary-dark: #ffcc00;
   padding: 1rem;
   &__icon {
     font-size: 3rem;
-    margin-bottom: 1rem;
+    color: orange;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1.5rem;
   }
   &__content {
     margin-bottom: 1.5rem;
@@ -67,4 +72,9 @@ $primary-dark: #ffcc00;
     font-size: 0.9rem;
     font-style: italic;
   }
+}
+.modal__footer-buttons {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
 }

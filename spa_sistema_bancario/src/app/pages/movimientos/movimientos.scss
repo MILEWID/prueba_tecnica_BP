@@ -1,9 +1,8 @@
-/* Movimientos specific styles */
+
 .movimientos { 
   padding: 1rem; 
 }
 
-/* Enhanced table styles for movements */
 .data-table {
   tbody tr:hover {
     background-color: #f8fafc;
@@ -13,7 +12,6 @@
     vertical-align: middle;
   }
 
-  /* Amount colors */
   .text-green-600 {
     color: #059669 !important;
     font-weight: 600;
@@ -24,7 +22,7 @@
     font-weight: 600;
   }
 
-  /* Badge styles for movement types */
+ 
   .badge--success {
     background-color: #dcfdf7;
     color: #059669;
@@ -38,7 +36,7 @@
   }
 }
 
-/* Movement type icons and styling */
+
 .movement-type {
   display: inline-flex;
   align-items: center;
@@ -61,7 +59,7 @@
   }
 }
 
-/* Delete confirmation modal */
+
 .delete-confirmation {
   text-align: center;
   padding: 1.5rem;
@@ -69,11 +67,12 @@
   margin: 0 auto;
 
   &__icon {
-    font-size: 3.5rem;
-    margin-bottom: 1rem;
-    display: block;
-    animation: pulse 2s infinite;
-    color: #dc2626;
+    font-size: 3rem;
+    color: orange;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1.5rem;
     
     .material-icons {
       font-size: inherit;
@@ -111,7 +110,6 @@
       font-size: 0.875rem;
     }
 
-    /* Movement amount styling in confirmation */
     .text-green-600,
     .text-red-600 {
       font-weight: 700;
@@ -131,7 +129,7 @@
   }
 }
 
-/* Delete button styling */
+
 .delete-btn {
   background-color: #dc3545 !important;
   border-color: #dc3545 !important;
@@ -149,7 +147,7 @@
   }
 }
 
-/* Action buttons in table */
+
 .table-actions {
   display: flex;
   gap: 0.5rem;
@@ -194,7 +192,7 @@
   }
 }
 
-/* Loading state */
+
 .loading {
   text-align: center;
   padding: 3rem;
@@ -216,7 +214,7 @@
   }
 }
 
-/* Pulse animation for warning icon */
+
 @keyframes pulse {
   0%, 100% {
     opacity: 1;
@@ -228,7 +226,7 @@
   }
 }
 
-/* Responsive improvements */
+
 @media (max-width: 768px) {
   .data-table {
     font-size: 0.875rem;
@@ -248,7 +246,7 @@
   }
 }
 
-/* Enhanced search controls for movements */
+
 .search-controls {
   position: relative;
   flex: 1;
@@ -277,4 +275,10 @@
       transform: translateY(-50%) scale(1.1);
     }
   }
+}
+
+.modal__footer-buttons {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
 }

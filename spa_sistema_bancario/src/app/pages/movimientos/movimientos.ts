@@ -26,23 +26,23 @@ interface ModalConfig {
 export class Movimientos implements OnInit {
   @ViewChild('movimientoForm') movimientoForm!: MovimientoForm;
 
-  protected movimientos = signal<MovimientoDTO[]>([]);
-  protected filteredMovimientos = signal<MovimientoDTO[]>([]);
-  protected searchTerm = signal<string>('');
-  protected isLoading = signal<boolean>(false);
-  protected error = signal<string>('');
-  protected successMessage = signal<string>('');
-  protected isCreateModalOpen = signal<boolean>(false);
-  protected isDeleteModalOpen = signal<boolean>(false);
-  protected selectedMovimiento = signal<MovimientoDTO | null>(null);
+  movimientos = signal<MovimientoDTO[]>([]);
+  filteredMovimientos = signal<MovimientoDTO[]>([]);
+  searchTerm = signal<string>('');
+  isLoading = signal<boolean>(false);
+  error = signal<string>('');
+  successMessage = signal<string>('');
+  isCreateModalOpen = signal<boolean>(false);
+  isDeleteModalOpen = signal<boolean>(false);
+  selectedMovimiento = signal<MovimientoDTO | null>(null);
 
-  protected readonly createModalConfig: ModalConfig = {
+  readonly createModalConfig: ModalConfig = {
     title: 'Realizar Nuevo Movimiento',
     showFooter: false,
     showCloseButton: true
   };
 
-  protected readonly deleteModalConfig: ModalConfig = {
+  readonly deleteModalConfig: ModalConfig = {
     title: 'Confirmar Eliminación',
     showFooter: true,
     showCloseButton: true,
@@ -70,12 +70,12 @@ export class Movimientos implements OnInit {
     });
   }
 
-  protected onSearchChange(term: string): void {
+  onSearchChange(term: string): void {
     this.searchTerm.set(term);
     this.filterMovimientos();
   }
 
-  protected clearSearch(): void {
+  clearSearch(): void {
     this.searchTerm.set('');
     this.filterMovimientos();
   }
@@ -95,25 +95,25 @@ export class Movimientos implements OnInit {
     this.filteredMovimientos.set(filtered);
   }
 
-  protected openCreateModal(): void {
+  openCreateModal(): void {
     this.isCreateModalOpen.set(true);
   }
 
-  protected closeCreateModal(): void {
+  closeCreateModal(): void {
     this.isCreateModalOpen.set(false);
   }
 
-  protected openDeleteModal(movimiento: MovimientoDTO): void {
+  openDeleteModal(movimiento: MovimientoDTO): void {
     this.selectedMovimiento.set(movimiento);
     this.isDeleteModalOpen.set(true);
   }
 
-  protected closeDeleteModal(): void {
+  closeDeleteModal(): void {
     this.isDeleteModalOpen.set(false);
     this.selectedMovimiento.set(null);
   }
 
-  protected onCreateMovimiento(movimientoData: MovimientoRequest): void {
+  onCreateMovimiento(movimientoData: MovimientoRequest): void {
     this.movimientoService.realizarMovimiento(movimientoData.numeroCuenta, movimientoData.valor).subscribe({
       next: (response) => {
         this.successMessage.set(response.resultado);
@@ -132,7 +132,7 @@ export class Movimientos implements OnInit {
     });
   }
 
-  protected confirmDelete(): void {
+  confirmDelete(): void {
     const movimiento = this.selectedMovimiento();
     if (!movimiento?.id) return;
 

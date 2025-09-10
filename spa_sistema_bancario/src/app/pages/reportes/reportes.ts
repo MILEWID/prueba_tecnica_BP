@@ -2,7 +2,7 @@ import { Component, OnInit, signal, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MovimientoService } from '../../services/movimiento.service';
-import { ClientService } from '../../services/client';
+import { ClientService } from '../../services/client.service';
 import { MovimientoDTO } from '../../models/movimiento.interface';
 import { Client } from '../../models/client.interface';
 
@@ -97,7 +97,6 @@ export class Reportes implements OnInit {
       return;
     }
 
-    // Validar fechas
     const desde = new Date(this.fechaDesde());
     const hasta = new Date(this.fechaHasta());
     
@@ -143,7 +142,6 @@ export class Reportes implements OnInit {
       } else {
         totalEgresos += Math.abs(movimiento.movimiento);
       }
-      // El último saldo es el saldo final
       saldoFinal = movimiento.saldoDisponible;
     });
 
@@ -198,14 +196,12 @@ export class Reportes implements OnInit {
       const byteArray = new Uint8Array(byteNumbers);
       const blob = new Blob([byteArray], { type: 'application/pdf' });
       
-      // Crear link de descarga
       const link = document.createElement('a');
       link.href = window.URL.createObjectURL(blob);
       link.download = fileName;
       document.body.appendChild(link);
       link.click();
       
-      // Limpiar
       document.body.removeChild(link);
       window.URL.revokeObjectURL(link.href);
       

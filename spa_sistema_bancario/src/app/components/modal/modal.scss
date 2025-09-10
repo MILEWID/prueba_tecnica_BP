@@ -113,8 +113,8 @@ $modal-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 }
 .modal__footer-buttons {
   display: flex;
-  gap: 0.75rem;
-  justify-content: flex-end;
+  gap: 1.5rem;
+  justify-content: center;
   @media (max-width: 768px) {
     flex-direction: column-reverse;
     gap: 0.5rem;
@@ -188,5 +188,24 @@ $modal-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   .modal__close-button {
     padding: 0.5rem;
     font-size: 1.25rem;
+  }
+}
+
+.delete-confirmation__icon {
+  font-size: 3rem;
+  color: orange;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.delete-btn {
+  background-color: #dc3545 !important;
+  border-color: #dc3545 !important;
+  transition: background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  &:hover {
+    background-color: #c82333 !important;
+    border-color: #bd2130 !important;
   }
 }

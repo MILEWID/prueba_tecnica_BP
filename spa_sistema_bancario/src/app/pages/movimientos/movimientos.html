@@ -114,14 +114,6 @@
       <div class="empty-state__description">
         {{ searchTerm() ? 'Intenta con otros términos de búsqueda' : 'Los movimientos de las cuentas aparecerán aquí' }}
       </div>
-      <button 
-        *ngIf="!searchTerm()" 
-        class="btn btn--primary"
-        (click)="openCreateModal()"
-      >
-        <span class="btn__icon"><i class="material-icons">account_balance_wallet</i></span>
-        Realizar Primer Movimiento
-      </button>
     </div>
   </div>
 </section>
@@ -149,32 +141,12 @@
     <div class="delete-confirmation__icon"><i class="material-icons">warning</i></div>
     <div class="delete-confirmation__content">
       <p class="delete-confirmation__text">
-        ¿Está seguro que desea eliminar este movimiento?
-      </p>
-      <div class="delete-confirmation__details" *ngIf="selectedMovimiento()">
-        <strong>{{ selectedMovimiento()!.numeroCuenta }}</strong><br>
-        <span class="text-muted">Cliente: {{ selectedMovimiento()!.cliente || 'N/A' }}</span><br>
-        <span [ngClass]="getMovimientoTypeClass(selectedMovimiento()!.movimiento)">
-          {{ selectedMovimiento()!.movimiento | currency:'USD':'symbol':'1.2-2' }}
-        </span>
-      </div>
-      <p class="delete-confirmation__warning">
-        Esta acción no se puede deshacer.
+        ¿Eliminar movimiento?
       </p>
     </div>
   </div>
   <div slot="footer" class="modal__footer-buttons">
-    <button 
-      class="btn btn--outline" 
-      (click)="closeDeleteModal()"
-    >
-      Cancelar
-    </button>
-    <button 
-      class="btn btn--primary delete-btn" 
-      (click)="confirmDelete()"
-    >
-      Eliminar
-    </button>
+    <button class="btn btn--outline" (click)="closeDeleteModal()">Cancelar</button>
+    <button class="btn btn--primary delete-btn" (click)="confirmDelete()">Eliminar</button>
   </div>
 </app-modal>
