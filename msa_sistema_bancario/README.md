@@ -161,7 +161,7 @@ msa_sistema_bancario/
 - MapStruct genera factories para mappers
 
 ### 6. **Builder Pattern**
-- Uso de constructores y métodos encadenados para crear objetos complejos (DTOs, entidades)
+- Uso de constructores y métodos encadenados para crear objetos complejos usado para la generaci[on de PDFs 
 - Facilita la creación y modificación de instancias en el dominio y la capa de aplicación
 
 ## 🚀 Tecnologías Utilizadas
@@ -227,11 +227,6 @@ cd msa_sistema_bancario
 docker build -t msa-sistema-bancario:latest .
 
 # 3. Ejecutar contenedor
-# La aplicación se conectará automáticamente a la base de datos remota definida en application.properties:
-# URL: jdbc:postgresql://postgresql-arquitecturaut.alwaysdata.net:5432/arquitecturaut_bdd_accounts
-# Usuario: arquitecturaut_us
-# Contraseña: Caramelo200
-
 docker run -p 8081:8081 msa-sistema-bancario:latest
 ```
 > **Nota:** El build de producción no ejecuta los tests. Si deseas compilar y ejecutar los tests, usa `./gradlew test` antes del build.
@@ -316,6 +311,6 @@ Ver la colección Postman incluida en el repositorio para ejemplos de cada endpo
 
 ### Identificación de Cliente
 Para las operaciones que requieren identificación de cliente, usar el valor único "123456":
-- Crear cuenta: `clienteIdentificacion: "123456"`
-- Buscar cuentas: `GET /api/cuentas/cliente/123456`
-- Generar reportes: `identificacion=123456`
+- Crear cuenta: `clienteIdentificacion: "123456789"`
+- Buscar cuentas: `GET /api/cuentas/cliente/123456789`
+- Generar reportes: `identificacion=123456789`
