@@ -30,48 +30,83 @@ Sistema bancario desarrollado con **Arquitectura Hexagonal (Ports & Adapters)** 
 
 ### Estructura del Proyecto
 ```
-src/main/java/com/pichincha/
-├── MsaSistemaBancarioApplication.java    # Punto de entrada
-├── adapters/                             # ADAPTADORES
-│   ├── input/                           # Adaptadores de entrada
-│   │   └── rest/                        # Controllers REST
-│   │       ├── ClienteController.java
-│   │       ├── CuentaController.java
-│   │       ├── MovimientoController.java
-│   │       └── GlobalExceptionHandler.java
-│   └── output/                          # Adaptadores de salida
-│       ├── persistence/                 # Adaptadores JPA
-│       │   ├── ClienteRepositoryAdapter.java
-│       │   ├── CuentaRepositoryAdapter.java
-│       │   └── MovimientoRepositoryAdapter.java
-│       └── external/                    # Servicios externos
-│           └── PdfReportGenerator.java
-├── application/                         # CAPA DE APLICACIÓN
-│   └── usecases/                       # Casos de uso (Lógica de negocio)
-│       ├── ClienteUseCaseImpl.java
-│       ├── CuentaUseCaseImpl.java
-│       └── MovimientoUseCaseImpl.java
-├── domain/                             # DOMINIO
-│   ├── Cliente.java                    # Entidades del dominio
-│   ├── Cuenta.java
-│   ├── Movimiento.java
-│   └── Persona.java
-├── ports/                              # PUERTOS (Interfaces)
-│   ├── input/                          # Puertos de entrada
-│   │   ├── ClienteUseCase.java
-│   │   ├── CuentaUseCase.java
-│   │   └── MovimientoUseCase.java
-│   └── output/                         # Puertos de salida
-│       ├── ClienteRepositoryPort.java
-│       ├── CuentaRepositoryPort.java
-│       ├── MovimientoRepositoryPort.java
-│       └── ReporteGeneratorPort.java
-├── dto/                                # Data Transfer Objects
-├── mappers/                            # MapStruct Mappers
-├── errors/                             # Excepciones personalizadas
-└── config/                             # Configuraciones
-    ├── BeanConfiguration.java
-    └── OpenApiConfig.java
+msa_sistema_bancario/
+├── build.gradle
+├── db_schema.sql
+├── Dockerfile
+├── gradlew
+├── gradlew.bat
+├── postman_collection.json
+├── README.md
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   └── com/pichincha/
+│   │   │       ├── MsaSistemaBancarioApplication.java
+│   │   │       ├── application/
+│   │   │       │   ├── input/
+│   │   │       │   │   └── port/
+│   │   │       │   ├── output/
+│   │   │       │   │   └── port/
+│   │   │       │   └── service/
+│   │   │       │       ├── ClienteService.java
+│   │   │       │       ├── CuentaService.java
+│   │   │       │       └── MovimientoService.java
+│   │   │       ├── domain/
+│   │   │       │   ├── Cliente.java
+│   │   │       │   ├── Cuenta.java
+│   │   │       │   ├── Movimiento.java
+│   │   │       │   ├── Persona.java
+│   │   │       │   └── enums/
+│   │   │       │       ├── Genero.java
+│   │   │       │       └── TipoCuenta.java
+│   │   │       ├── infrastructure/
+│   │   │       │   ├── exception/
+│   │   │       │   │   ├── ApiException.java
+│   │   │       │   │   ├── ClienteNoEncontradoException.java
+│   │   │       │   │   ├── CuentaNoEncontradaException.java
+│   │   │       │   │   ├── DatosInvalidosException.java
+│   │   │       │   │   ├── GeneralApplicationException.java
+│   │   │       │   │   ├── GlobalExceptionHandler.java
+│   │   │       │   │   └── MovimientoNoEncontradoException.java
+│   │   │       │   ├── input/
+│   │   │       │   │   ├── adapter/
+│   │   │       │   │   │   └── dto/
+│   │   │       │   │   │       ├── ClienteDTO.java
+│   │   │       │   │   │       ├── CuentaDTO.java
+│   │   │       │   │   │       ├── ErrorDto.java
+│   │   │       │   │   │       └── MovimientoDTO.java
+│   │   │       │   │   └── rest/
+│   │   │       │   │       └── dto/
+│   │   │       │   │           ├── ClienteDTO.java
+│   │   │       │   │           ├── CuentaDTO.java
+│   │   │       │   │           └── MovimientoDTO.java
+│   │   │       │   ├── output/
+│   │   │       │   │   ├── adapter/
+│   │   │       │   │   │   ├── mapper/
+│   │   │       │   │   │   │   ├── ClienteMapper.java
+│   │   │       │   │   │   │   ├── CuentaMapper.java
+│   │   │       │   │   │   │   └── MovimientoMapper.java
+│   │   │       │   │   │   ├── persistence/
+│   │   │       │   │   │   │   ├── ClienteRepositoryAdapter.java
+│   │   │       │   │   │   │   ├── CuentaRepositoryAdapter.java
+│   │   │       │   │   │   │   ├── MovimientoRepositoryAdapter.java
+│   │   │       │   │   │   │   └── repository/
+│   │   │       │   │   │   ├── report/
+│   │   │       │   │   │   │   ├── PdfReportBuilder.java
+│   │   │       │   │   │   │   └── PdfReportGenerator.java
+│   └── resources/
+│       └── application.properties
+│
+└── src/
+    └── test/
+        └── java/
+            └── com/pichincha/
+                └── infrastructure/
+                    └── input/
+                        └── adapter/
+                            └── dto/
+                                └── CuentaDTOTest.java
 ```
 
 ## 🎯 Principios SOLID Implementados
@@ -124,6 +159,10 @@ src/main/java/com/pichincha/
 ### 5. **Factory Pattern (Implicit)**
 - Spring Boot actúa como factory para beans
 - MapStruct genera factories para mappers
+
+### 6. **Builder Pattern**
+- Uso de constructores y métodos encadenados para crear objetos complejos (DTOs, entidades)
+- Facilita la creación y modificación de instancias en el dominio y la capa de aplicación
 
 ## 🚀 Tecnologías Utilizadas
 
@@ -180,30 +219,22 @@ ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./urandom", "-Xmx512m", "-Xms
 
 ### Comandos de Despliegue
 ```bash
-# 1. Construir el proyecto (desde la raíz del repo)
+# 1. Construir el proyecto (sin compilar tests)
 cd msa_sistema_bancario
-./gradlew clean build
+./gradlew clean build -x test
 
 # 2. Construir imagen Docker (desde la raíz del repo)
 docker build -t msa-sistema-bancario:latest .
 
 # 3. Ejecutar contenedor
-# (Por defecto, la app está configurada para conectarse a la base de datos remota definida en application.properties)
-# Si quieres usar la base remota:
-docker run -p 8081:8081 \
-  -e SPRING_DATASOURCE_URL=jdbc:postgresql://postgresql-arquitecturaut.alwaysdata.net:5432/arquitecturaut_bdd_accounts \
-  -e SPRING_DATASOURCE_USERNAME=arquitecturaut_us \
-  -e SPRING_DATASOURCE_PASSWORD=Caramelo200 \
-  msa-sistema-bancario:latest
+# La aplicación se conectará automáticamente a la base de datos remota definida en application.properties:
+# URL: jdbc:postgresql://postgresql-arquitecturaut.alwaysdata.net:5432/arquitecturaut_bdd_accounts
+# Usuario: arquitecturaut_us
+# Contraseña: Caramelo200
 
-# Si quieres usar una base local, cambia las variables de entorno:
-# Ejemplo para desarrollo local:
-# docker run -p 8081:8081 \
-#   -e SPRING_DATASOURCE_URL=jdbc:postgresql://host.docker.internal:5432/bancario \
-#   -e SPRING_DATASOURCE_USERNAME=postgres \
-#   -e SPRING_DATASOURCE_PASSWORD=password \
-#   msa-sistema-bancario:latest
+docker run -p 8081:8081 msa-sistema-bancario:latest
 ```
+> **Nota:** El build de producción no ejecuta los tests. Si deseas compilar y ejecutar los tests, usa `./gradlew test` antes del build.
 
 ## 📚 API REST - Endpoints Principales
 

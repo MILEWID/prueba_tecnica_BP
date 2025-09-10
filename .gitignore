@@ -1,0 +1,30 @@
+# Java / Gradle
+/build/
+/.gradle/
+.gradle/
+*.log
+*.class
+*.jar
+*.war
+*.iml
+out/
+# IDEs
+/.idea/
+*.ipr
+*.iws
+*.bak
+*.swp
+# OS
+.DS_Store
+Thumbs.db
+# Angular / Node
+spa_sistema_bancario/node_modules/
+spa_sistema_bancario/dist/
+spa_sistema_bancario/.angular/
+spa_sistema_bancario/.env
+spa_sistema_bancario/.DS_Store
+# Coverage
+spa_sistema_bancario/coverage/
+# Misc
+.env
+*.env

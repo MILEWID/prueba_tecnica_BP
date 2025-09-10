@@ -1,25 +1,18 @@
-# Dockerfile para msa_sistema_bancario
 
-# Stage 1: Build
 FROM amazoncorretto:17-alpine-jdk AS builder
 WORKDIR /app
 COPY . .
-# Dar permisos de ejecución al wrapper de Gradle
 RUN chmod +x ./gradlew
-# Construir la aplicación
 RUN ./gradlew build -x test
 
-# Stage 2: Runtime
 FROM amazoncorretto:17-alpine
 WORKDIR /app
 
-# Instalar dependencias del sistema necesarias
 RUN apk add --no-cache curl
 
-# Copiar el JAR desde el stage de build
 COPY --from=builder /app/build/libs/msa_sistema_bancario-*.jar app.jar
 
-# Crear un usuario no-root por seguridad
+
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 RUN chown -R appuser:appgroup /app
 USER appuser

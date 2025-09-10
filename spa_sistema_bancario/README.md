@@ -1,62 +1,91 @@
-# SpaSistemaBancario (Frontend)
+# Sistema Bancario - Frontend (SPA)
 
-Sistema bancario SPA desarrollado en Angular 20.2.2. Permite la gestión de clientes, cuentas y movimientos bancarios, así como la generación de reportes y exportación en PDF. El frontend consume una API REST y está diseñado para ser escalable, mantenible y fácil de usar.
+## 📋 Descripción General
 
-## Estructura de carpetas principal
+SPA desarrollada en Angular 20+ para la gestión integral de clientes, cuentas y movimientos bancarios, con generación de reportes y exportación a PDF. Consume la API REST del backend y está optimizada para escalabilidad y mantenibilidad.
 
-- `src/app/components/`: Componentes reutilizables (formularios, modales, barra lateral, etc.)
-- `src/app/models/`: Interfaces TypeScript para tipado fuerte (Cliente, Cuenta, Movimiento)
-- `src/app/pages/`: Vistas principales (Clientes, Cuentas, Movimientos, Reportes)
-- `src/app/services/`: Servicios para comunicación con la API REST
-- `src/app/app.*`: Configuración y bootstrap de la aplicación
+## 🏗️ Arquitectura del Sistema
 
-## Instalación y ejecución
+- **Framework:** Angular 20+
+- **Estilos:** SCSS modular y responsivo
+- **UI:** Material Icons
+- **Testing:** Jest + Angular Testing Utilities
+- **Integración:** API REST en `http://localhost:8081/api/`
 
-1. Instala dependencias:
-   ```bash
-   npm install
-   ```
-2. Ejecuta el servidor de desarrollo:
-   ```bash
-   ng serve
-   ```
-3. Accede a la app en [http://localhost:4200](http://localhost:4200)
+### Estructura del Proyecto
+```
+spa_sistema_bancario/
+├── src/
+│   ├── app/
+│   │   ├── components/         # Componentes reutilizables (formularios, modales, sidebar, etc.)
+│   │   ├── models/             # Interfaces y DTOs TypeScript
+│   │   ├── pages/              # Vistas principales (Clientes, Cuentas, Movimientos, Reportes)
+│   │   ├── services/           # Servicios centralizados para API REST
+│   │   ├── app.*               #  configuración principal
+│   ├── assets/                 # Recursos estáticos
+│   └── styles.scss             # Estilos globales
+├── angular.json                # Configuración Angular
+├── jest.config.js              # Configuración Jest
+├── package.json                # Dependencias y scripts
+├── README.md                   # Documentación técnica
+```
 
-## Funcionalidades principales
+## 🚀 Funcionalidades Principales
 
-- **Clientes:** Alta, edición y listado de clientes.
-- **Cuentas:** Creación y gestión de cuentas bancarias asociadas a clientes.
-- **Movimientos:** Registro de depósitos/retiros, consulta de historial, eliminación de movimientos.
-- **Reportes:** Generación de reportes filtrados por cliente y rango de fechas, exportación a PDF.
+- 👥 Gestión de Clientes: Alta, edición, listado y validaciones.
+- 🏦 Gestión de Cuentas: Creación, edición, asociación y estados.
+- 💰 Movimientos: Depósitos, retiros, historial y filtrado.
+- 📊 Reportes: Por cliente y período, exportación PDF, filtros avanzados.
 
-## Buenas prácticas implementadas
+## 🛠️ Instalación y Ejecución
 
-- Tipado estricto con interfaces y DTOs.
-- Componentes desacoplados y reutilizables.
-- Servicios centralizados para acceso a datos.
-- Manejo de estados y mensajes de error/success reactivos.
-- Validaciones de formularios y feedback visual.
-- Uso de Angular Signals para gestión eficiente de estado.
-- Estilos modulares y responsivos (SCSS).
+```bash
+# Instalar dependencias
+npm install
 
-## Testing
+# Ejecutar en modo desarrollo
+ng serve
 
-- Unit tests con Jest y Angular Testing Utilities.
-- E2E tests recomendados (no incluidos por defecto).
+# Acceder a la app
+http://localhost:4200
+```
 
-## Recomendaciones para desarrollo
+## 🧪 Testing
 
-- Usa `ng generate` para crear nuevos componentes, servicios, etc.
-- Mantén la lógica de negocio en los servicios y la presentación en los componentes.
-- Revisa los modelos en `src/app/models/` antes de consumir/crear datos.
-- Para nuevas integraciones, sigue el patrón de servicios y tipado estricto.
+```bash
+# Ejecutar tests unitarios
+npx jest --coverage
 
-## Integración con backend
 
-- El frontend espera una API REST en `http://localhost:8081/api/`.
-- Revisa los DTOs y endpoints en el backend para asegurar compatibilidad.
+```
 
-## Recursos útiles
+## 🎨 Características de Diseño
+
+- Paleta de colores corporativa
+- Responsive design y optimización móvil
+- Material Icons y estados visuales claros
+- Sidebar colapsible y tablas con scroll
+
+## 🧹 Estado de Optimización
+
+- Limpieza y modularización de estilos SCSS
+- Componentes desacoplados y reutilizables
+- Documentación técnica completa
+
+## 🤝 Recomendaciones y Buenas Prácticas
+
+- Usa `ng generate` para nuevos componentes y servicios
+- Mantén la lógica en servicios y la presentación en componentes
+- Valida datos y usa tipado estricto
+- Revisa los modelos antes de consumir/crear datos
+- Sigue el patrón de servicios y DTOs para integraciones
+
+## 📦 Integración con Backend
+
+- API REST esperada en `http://localhost:8081/api/`
+- Compatibilidad asegurada revisando DTOs y endpoints
+
+## 📄 Recursos Útiles
 
 - [Angular CLI Reference](https://angular.dev/tools/cli)
 - [Angular Signals](https://angular.dev/reference/signals)
