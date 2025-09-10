@@ -1,59 +1,95 @@
-# SpaSistemaBancario
+# Sistema Bancario - Frontend (SPA)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.2.2.
+## 📋 Descripción General
 
-## Development server
+SPA desarrollada en Angular 20+ para la gestión integral de clientes, cuentas y movimientos bancarios, con generación de reportes y exportación a PDF. Consume la API REST del backend y está optimizada para escalabilidad y mantenibilidad.
 
-To start a local development server, run:
+## 🏗️ Arquitectura del Sistema
+
+- **Framework:** Angular 20+
+- **Estilos:** SCSS modular y responsivo
+- **UI:** Material Icons
+- **Testing:** Jest + Angular Testing Utilities
+- **Integración:** API REST en `http://localhost:8081/api/`
+
+### Estructura del Proyecto
+```
+spa_sistema_bancario/
+├── src/
+│   ├── app/
+│   │   ├── components/         # Componentes reutilizables (formularios, modales, sidebar, etc.)
+│   │   ├── models/             # Interfaces y DTOs TypeScript
+│   │   ├── pages/              # Vistas principales (Clientes, Cuentas, Movimientos, Reportes)
+│   │   ├── services/           # Servicios centralizados para API REST
+│   │   ├── app.*               #  configuración principal
+│   ├── assets/                 # Recursos estáticos
+│   └── styles.scss             # Estilos globales
+├── angular.json                # Configuración Angular
+├── jest.config.js              # Configuración Jest
+├── package.json                # Dependencias y scripts
+├── README.md                   # Documentación técnica
+```
+
+## 🚀 Funcionalidades Principales
+
+- 👥 Gestión de Clientes: Alta, edición, listado y validaciones.
+- 🏦 Gestión de Cuentas: Creación, edición, asociación y estados.
+- 💰 Movimientos: Depósitos, retiros, historial y filtrado.
+- 📊 Reportes: Por cliente y período, exportación PDF, filtros avanzados.
+
+## 🛠️ Instalación y Ejecución
 
 ```bash
+# Instalar dependencias
+npm install
+
+# Ejecutar en modo desarrollo
 ng serve
+
+# Acceder a la app
+http://localhost:4200
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 🧪 Testing
 
 ```bash
-ng generate component component-name
+# Ejecutar tests unitarios
+npx jest --coverage
+
+
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## 🎨 Características de Diseño
 
-```bash
-ng generate --help
-```
+- Paleta de colores corporativa
+- Responsive design y optimización móvil
+- Material Icons y estados visuales claros
+- Sidebar colapsible y tablas con scroll
 
-## Building
+## 🧹 Estado de Optimización
 
-To build the project run:
+- Limpieza y modularización de estilos SCSS
+- Componentes desacoplados y reutilizables
+- Documentación técnica completa
 
-```bash
-ng build
-```
+## 🤝 Recomendaciones y Buenas Prácticas
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+- Usa `ng generate` para nuevos componentes y servicios
+- Mantén la lógica en servicios y la presentación en componentes
+- Valida datos y usa tipado estricto
+- Revisa los modelos antes de consumir/crear datos
+- Sigue el patrón de servicios y DTOs para integraciones
 
-## Running unit tests
+## 📦 Integración con Backend
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+- API REST esperada en `http://localhost:8081/api/`
+- Compatibilidad asegurada revisando DTOs y endpoints
 
-```bash
-ng test
-```
+## 📄 Recursos Útiles
 
-## Running end-to-end tests
+- [Angular CLI Reference](https://angular.dev/tools/cli)
+- [Angular Signals](https://angular.dev/reference/signals)
+- [Jest Testing](https://jestjs.io/)
 
-For end-to-end (e2e) testing, run:
+---
 
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.

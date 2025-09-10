@@ -27,30 +27,30 @@ export class Cuentas implements OnInit {
   @ViewChild('createCuentaForm') createCuentaForm!: CuentaForm;
   @ViewChild('editCuentaForm') editCuentaForm!: CuentaForm;
 
-  protected cuentas = signal<Cuenta[]>([]);
-  protected filteredCuentas = signal<Cuenta[]>([]);
-  protected searchTerm = signal<string>('');
-  protected isLoading = signal<boolean>(false);
-  protected error = signal<string>('');
-  protected successMessage = signal<string>('');
-  protected isCreateModalOpen = signal<boolean>(false);
-  protected isEditModalOpen = signal<boolean>(false);
-  protected isDeleteModalOpen = signal<boolean>(false);
-  protected selectedCuenta = signal<Cuenta | null>(null);
+  cuentas = signal<Cuenta[]>([]);
+  filteredCuentas = signal<Cuenta[]>([]);
+  searchTerm = signal<string>('');
+  isLoading = signal<boolean>(false);
+  error = signal<string>('');
+  successMessage = signal<string>('');
+  isCreateModalOpen = signal<boolean>(false);
+  isEditModalOpen = signal<boolean>(false);
+  isDeleteModalOpen = signal<boolean>(false);
+  selectedCuenta = signal<Cuenta | null>(null);
 
-  protected readonly createModalConfig: ModalConfig = {
+  readonly createModalConfig: ModalConfig = {
     title: 'Agregar Nueva Cuenta',
     showFooter: false,
     showCloseButton: true
   };
 
-  protected readonly editModalConfig: ModalConfig = {
+  readonly editModalConfig: ModalConfig = {
     title: 'Editar Cuenta',
     showFooter: false,
     showCloseButton: true
   };
 
-  protected readonly deleteModalConfig: ModalConfig = {
+  readonly deleteModalConfig: ModalConfig = {
     title: 'Confirmar Eliminación',
     showFooter: true,
     showCloseButton: true,
@@ -75,12 +75,12 @@ export class Cuentas implements OnInit {
     });
   }
 
-  protected onSearchChange(term: string): void {
+  onSearchChange(term: string): void {
     this.searchTerm.set(term);
     this.filterCuentas();
   }
 
-  protected clearSearch(): void {
+  clearSearch(): void {
     this.searchTerm.set('');
     this.filterCuentas();
   }
@@ -93,43 +93,43 @@ export class Cuentas implements OnInit {
     }
 
     const filtered = this.cuentas().filter((cuenta: Cuenta) => 
-      cuenta.numeroCuenta.toLowerCase().includes(term) ||
-      (cuenta.clienteNombre && cuenta.clienteNombre.toLowerCase().includes(term)) ||
+      cuenta.clienteNombre?.toLowerCase().includes(term) ||
+      (cuenta.numeroCuenta&& cuenta.numeroCuenta.includes(term)) ||
       cuenta.clienteIdentificacion.toLowerCase().includes(term) ||
       cuenta.tipoCuenta.toLowerCase().includes(term)
     );
     this.filteredCuentas.set(filtered);
   }
 
-  protected openCreateModal(): void {
+  openCreateModal(): void {
     this.isCreateModalOpen.set(true);
   }
 
-  protected closeCreateModal(): void {
+  closeCreateModal(): void {
     this.isCreateModalOpen.set(false);
   }
 
-  protected openEditModal(cuenta: Cuenta): void {
+  openEditModal(cuenta: Cuenta): void {
     this.selectedCuenta.set(cuenta);
     this.isEditModalOpen.set(true);
   }
 
-  protected closeEditModal(): void {
+  closeEditModal(): void {
     this.isEditModalOpen.set(false);
     this.selectedCuenta.set(null);
   }
 
-  protected openDeleteModal(cuenta: Cuenta): void {
+  openDeleteModal(cuenta: Cuenta): void {
     this.selectedCuenta.set(cuenta);
     this.isDeleteModalOpen.set(true);
   }
 
-  protected closeDeleteModal(): void {
+  closeDeleteModal(): void {
     this.isDeleteModalOpen.set(false);
     this.selectedCuenta.set(null);
   }
 
-  protected onCreateCuenta(cuentaData: CuentaRequest): void {
+  onCreateCuenta(cuentaData: CuentaRequest): void {
     this.cuentaService.createCuenta(cuentaData).subscribe({
       next: (newCuenta: Cuenta) => {
         this.successMessage.set('Cuenta creada exitosamente');
@@ -148,7 +148,7 @@ export class Cuentas implements OnInit {
     });
   }
 
-  protected onEditCuenta(cuentaData: CuentaRequest): void {
+  onEditCuenta(cuentaData: CuentaRequest): void {
     const cuenta = this.selectedCuenta();
     if (!cuenta?.id) return;
 
@@ -170,7 +170,7 @@ export class Cuentas implements OnInit {
     });
   }
 
-  protected confirmDelete(): void {
+  confirmDelete(): void {
     const cuenta = this.selectedCuenta();
     if (!cuenta?.id) return;
 

@@ -1,5 +1,7 @@
 # 🏦 MSA Sistema Bancario - Arquitectura Hexagonal
 
+> ⚠️ **Nota:** El nombre de la imagen Docker y el puerto expuesto deben coincidir con el README general del proyecto. Usa `msa-sistema-bancario:latest` y el puerto `8081` para evitar confusiones.
+
 [![Java](https://img.shields.io/badge/Java-17-orange.svg)](https://openjdk.java.net/projects/jdk/17/)
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.2.0-brightgreen.svg)](https://spring.io/projects/spring-boot)
 [![Gradle](https://img.shields.io/badge/Gradle-8.4-blue.svg)](https://gradle.org)
@@ -28,48 +30,83 @@ Sistema bancario desarrollado con **Arquitectura Hexagonal (Ports & Adapters)** 
 
 ### Estructura del Proyecto
 ```
-src/main/java/com/pichincha/
-├── MsaSistemaBancarioApplication.java    # Punto de entrada
-├── adapters/                             # ADAPTADORES
-│   ├── input/                           # Adaptadores de entrada
-│   │   └── rest/                        # Controllers REST
-│   │       ├── ClienteController.java
-│   │       ├── CuentaController.java
-│   │       ├── MovimientoController.java
-│   │       └── GlobalExceptionHandler.java
-│   └── output/                          # Adaptadores de salida
-│       ├── persistence/                 # Adaptadores JPA
-│       │   ├── ClienteRepositoryAdapter.java
-│       │   ├── CuentaRepositoryAdapter.java
-│       │   └── MovimientoRepositoryAdapter.java
-│       └── external/                    # Servicios externos
-│           └── PdfReportGenerator.java
-├── application/                         # CAPA DE APLICACIÓN
-│   └── usecases/                       # Casos de uso (Lógica de negocio)
-│       ├── ClienteUseCaseImpl.java
-│       ├── CuentaUseCaseImpl.java
-│       └── MovimientoUseCaseImpl.java
-├── domain/                             # DOMINIO
-│   ├── Cliente.java                    # Entidades del dominio
-│   ├── Cuenta.java
-│   ├── Movimiento.java
-│   └── Persona.java
-├── ports/                              # PUERTOS (Interfaces)
-│   ├── input/                          # Puertos de entrada
-│   │   ├── ClienteUseCase.java
-│   │   ├── CuentaUseCase.java
-│   │   └── MovimientoUseCase.java
-│   └── output/                         # Puertos de salida
-│       ├── ClienteRepositoryPort.java
-│       ├── CuentaRepositoryPort.java
-│       ├── MovimientoRepositoryPort.java
-│       └── ReporteGeneratorPort.java
-├── dto/                                # Data Transfer Objects
-├── mappers/                            # MapStruct Mappers
-├── errors/                             # Excepciones personalizadas
-└── config/                             # Configuraciones
-    ├── BeanConfiguration.java
-    └── OpenApiConfig.java
+msa_sistema_bancario/
+├── build.gradle
+├── db_schema.sql
+├── Dockerfile
+├── gradlew
+├── gradlew.bat
+├── postman_collection.json
+├── README.md
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   └── com/pichincha/
+│   │   │       ├── MsaSistemaBancarioApplication.java
+│   │   │       ├── application/
+│   │   │       │   ├── input/
+│   │   │       │   │   └── port/
+│   │   │       │   ├── output/
+│   │   │       │   │   └── port/
+│   │   │       │   └── service/
+│   │   │       │       ├── ClienteService.java
+│   │   │       │       ├── CuentaService.java
+│   │   │       │       └── MovimientoService.java
+│   │   │       ├── domain/
+│   │   │       │   ├── Cliente.java
+│   │   │       │   ├── Cuenta.java
+│   │   │       │   ├── Movimiento.java
+│   │   │       │   ├── Persona.java
+│   │   │       │   └── enums/
+│   │   │       │       ├── Genero.java
+│   │   │       │       └── TipoCuenta.java
+│   │   │       ├── infrastructure/
+│   │   │       │   ├── exception/
+│   │   │       │   │   ├── ApiException.java
+│   │   │       │   │   ├── ClienteNoEncontradoException.java
+│   │   │       │   │   ├── CuentaNoEncontradaException.java
+│   │   │       │   │   ├── DatosInvalidosException.java
+│   │   │       │   │   ├── GeneralApplicationException.java
+│   │   │       │   │   ├── GlobalExceptionHandler.java
+│   │   │       │   │   └── MovimientoNoEncontradoException.java
+│   │   │       │   ├── input/
+│   │   │       │   │   ├── adapter/
+│   │   │       │   │   │   └── dto/
+│   │   │       │   │   │       ├── ClienteDTO.java
+│   │   │       │   │   │       ├── CuentaDTO.java
+│   │   │       │   │   │       ├── ErrorDto.java
+│   │   │       │   │   │       └── MovimientoDTO.java
+│   │   │       │   │   └── rest/
+│   │   │       │   │       └── dto/
+│   │   │       │   │           ├── ClienteDTO.java
+│   │   │       │   │           ├── CuentaDTO.java
+│   │   │       │   │           └── MovimientoDTO.java
+│   │   │       │   ├── output/
+│   │   │       │   │   ├── adapter/
+│   │   │       │   │   │   ├── mapper/
+│   │   │       │   │   │   │   ├── ClienteMapper.java
+│   │   │       │   │   │   │   ├── CuentaMapper.java
+│   │   │       │   │   │   │   └── MovimientoMapper.java
+│   │   │       │   │   │   ├── persistence/
+│   │   │       │   │   │   │   ├── ClienteRepositoryAdapter.java
+│   │   │       │   │   │   │   ├── CuentaRepositoryAdapter.java
+│   │   │       │   │   │   │   ├── MovimientoRepositoryAdapter.java
+│   │   │       │   │   │   │   └── repository/
+│   │   │       │   │   │   ├── report/
+│   │   │       │   │   │   │   ├── PdfReportBuilder.java
+│   │   │       │   │   │   │   └── PdfReportGenerator.java
+│   └── resources/
+│       └── application.properties
+│
+└── src/
+    └── test/
+        └── java/
+            └── com/pichincha/
+                └── infrastructure/
+                    └── input/
+                        └── adapter/
+                            └── dto/
+                                └── CuentaDTOTest.java
 ```
 
 ## 🎯 Principios SOLID Implementados
@@ -123,6 +160,10 @@ src/main/java/com/pichincha/
 - Spring Boot actúa como factory para beans
 - MapStruct genera factories para mappers
 
+### 6. **Builder Pattern**
+- Uso de constructores y métodos encadenados para crear objetos complejos usado para la generaci[on de PDFs 
+- Facilita la creación y modificación de instancias en el dominio y la capa de aplicación
+
 ## 🚀 Tecnologías Utilizadas
 
 ### Backend Core
@@ -154,31 +195,41 @@ src/main/java/com/pichincha/
 
 ### Dockerfile Optimizado
 ```dockerfile
-FROM openjdk:17-jdk-slim
-VOLUME /tmp
-COPY build/libs/*.jar app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]
+# Stage 1: Build
+FROM amazoncorretto:17-alpine-jdk AS builder
+WORKDIR /app
+COPY . .
+RUN chmod +x ./gradlew
+RUN ./gradlew build -x test
+
+# Stage 2: Runtime
+FROM amazoncorretto:17-alpine
+WORKDIR /app
+RUN apk add --no-cache curl
+COPY --from=builder /app/build/libs/msa_sistema_bancario-*.jar app.jar
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+RUN chown -R appuser:appgroup /app
+USER appuser
 EXPOSE 8081
+ENV SPRING_PROFILES_ACTIVE=docker
+HEALTHCHECK --interval=30s --timeout=3s --start-period=40s --retries=3 \
+    CMD curl -f http://localhost:8081/actuator/health || exit 1
+ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./urandom", "-Xmx512m", "-Xms256m", "-jar", "app.jar"]
 ```
 
 ### Comandos de Despliegue
 ```bash
-# 1. Construir el proyecto
-./gradlew clean build
+# 1. Construir el proyecto (sin compilar tests)
+cd msa_sistema_bancario
+./gradlew clean build -x test
 
-# 2. Construir imagen Docker
+# 2. Construir imagen Docker (desde la raíz del repo)
 docker build -t msa-sistema-bancario:latest .
 
 # 3. Ejecutar contenedor
-docker run -p 8081:8081 \
-  -e SPRING_DATASOURCE_URL=jdbc:postgresql://host.docker.internal:5432/bancario \
-  -e SPRING_DATASOURCE_USERNAME=postgres \
-  -e SPRING_DATASOURCE_PASSWORD=password \
-  msa-sistema-bancario:latest
-
-# 4. Verificar funcionamiento
-curl http://localhost:8081/swagger-ui.html
+docker run -p 8081:8081 msa-sistema-bancario:latest
 ```
+> **Nota:** El build de producción no ejecuta los tests. Si deseas compilar y ejecutar los tests, usa `./gradlew test` antes del build.
 
 ## 📚 API REST - Endpoints Principales
 
@@ -260,6 +311,6 @@ Ver la colección Postman incluida en el repositorio para ejemplos de cada endpo
 
 ### Identificación de Cliente
 Para las operaciones que requieren identificación de cliente, usar el valor único "123456":
-- Crear cuenta: `clienteIdentificacion: "123456"`
-- Buscar cuentas: `GET /api/cuentas/cliente/123456`
-- Generar reportes: `identificacion=123456`
+- Crear cuenta: `clienteIdentificacion: "123456789"`
+- Buscar cuentas: `GET /api/cuentas/cliente/123456789`
+- Generar reportes: `identificacion=123456789`

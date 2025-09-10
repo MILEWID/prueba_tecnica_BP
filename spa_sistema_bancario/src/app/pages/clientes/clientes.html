@@ -131,29 +131,12 @@
     <div class="delete-confirmation__icon"><i class="material-icons">warning</i></div>
     <div class="delete-confirmation__content">
       <p class="delete-confirmation__text">
-        ¿Está seguro que desea eliminar al cliente?
-      </p>
-      <div class="delete-confirmation__details" *ngIf="selectedClient()">
-        <strong>{{ selectedClient()!.nombre }}</strong><br>
-        <span class="text-muted">Identificación: {{ selectedClient()!.identificacion }}</span>
-      </div>
-      <p class="delete-confirmation__warning">
-        Esta acción no se puede deshacer.
+        ¿Eliminar cliente?
       </p>
     </div>
   </div>
   <div slot="footer" class="modal__footer-buttons">
-    <button 
-      class="btn btn--outline" 
-      (click)="closeDeleteModal()"
-    >
-      Cancelar
-    </button>
-    <button 
-      class="btn btn--primary delete-btn" 
-      (click)="confirmDelete()"
-    >
-      Eliminar
-    </button>
+    <button class="btn btn--outline" (click)="closeDeleteModal()">Cancelar</button>
+    <button class="btn btn--primary delete-btn" (click)="confirmDelete()">Eliminar</button>
   </div>
 </app-modal>

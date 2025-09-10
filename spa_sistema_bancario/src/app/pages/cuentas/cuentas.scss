@@ -1,9 +1,8 @@
-// Los estilos se heredan de los estilos globales
+
 .cuentas { 
   padding: 1rem; 
 }
 
-// Estilos específicos para cuentas si son necesarios
 .delete-confirmation {
   text-align: center;
   padding: 1rem;
@@ -12,6 +11,11 @@
     font-size: 3rem;
     margin-bottom: 1rem;
     display: block;
+    color: orange;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1.5rem;
   }
 
   &__content {
@@ -49,13 +53,20 @@
   }
 }
 
-// Estilos específicos para el botón de eliminar en el modal
+
 .delete-btn {
   background-color: #dc3545 !important;
   border-color: #dc3545 !important;
+  transition: background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   
   &:hover {
     background-color: #c82333 !important;
     border-color: #bd2130 !important;
   }
+}
+
+.modal__footer-buttons {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
 }

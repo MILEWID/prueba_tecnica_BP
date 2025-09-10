@@ -65,24 +65,21 @@
       <tbody class="data-table__body">
         <tr *ngFor="let movimiento of filteredMovimientos(); trackBy: trackByMovimientoId">
           <td class="font-semibold">{{ formatDate(movimiento.fecha) }}</td>
-          <td>{{ movimiento.numeroCuenta }}</td>
-          <td>{{ movimiento.cliente || 'N/A' }}</td>
+          <td>{{ movimiento.cuenta.numeroCuenta }}</td>
+          <td>{{ movimiento.cuenta.clienteIdentificacion || 'N/A' }}</td>
           <td>
             <span 
               class="badge" 
               [ngClass]="{
-                'badge--success': movimiento.movimiento >= 0,
-                'badge--warning': movimiento.movimiento < 0
+                'badge--success': movimiento.valor >= 0,
+                'badge--warning': movimiento.valor < 0
               }">
-              {{ getMovimientoType(movimiento.movimiento) }}
+              {{ getMovimientoType(movimiento.valor) }}
             </span>
           </td>
           <td class="text-right font-semibold">{{ movimiento.saldoInicial | currency:'USD':'symbol':'1.2-2' }}</td>
-          <td class="text-right font-semibold" 
-              [ngClass]="getMovimientoTypeClass(movimiento.movimiento)">
-            {{ movimiento.movimiento | currency:'USD':'symbol':'1.2-2' }}
-          </td>
-          <td class="text-right font-semibold">{{ movimiento.saldoDisponible | currency:'USD':'symbol':'1.2-2' }}</td>
+          <td class="text-right font-semibold">{{ movimiento.valor | currency:'USD':'symbol':'1.2-2' }}</td>
+          <td class="text-right font-semibold">{{ movimiento.saldo | currency:'USD':'symbol':'1.2-2' }}</td>
           <td>
             <span 
               class="badge" 
@@ -114,14 +111,6 @@
       <div class="empty-state__description">
         {{ searchTerm() ? 'Intenta con otros términos de búsqueda' : 'Los movimientos de las cuentas aparecerán aquí' }}
       </div>
-      <button 
-        *ngIf="!searchTerm()" 
-        class="btn btn--primary"
-        (click)="openCreateModal()"
-      >
-        <span class="btn__icon"><i class="material-icons">account_balance_wallet</i></span>
-        Realizar Primer Movimiento
-      </button>
     </div>
   </div>
 </section>
@@ -149,32 +138,12 @@
     <div class="delete-confirmation__icon"><i class="material-icons">warning</i></div>
     <div class="delete-confirmation__content">
       <p class="delete-confirmation__text">
-        ¿Está seguro que desea eliminar este movimiento?
-      </p>
-      <div class="delete-confirmation__details" *ngIf="selectedMovimiento()">
-        <strong>{{ selectedMovimiento()!.numeroCuenta }}</strong><br>
-        <span class="text-muted">Cliente: {{ selectedMovimiento()!.cliente || 'N/A' }}</span><br>
-        <span [ngClass]="getMovimientoTypeClass(selectedMovimiento()!.movimiento)">
-          {{ selectedMovimiento()!.movimiento | currency:'USD':'symbol':'1.2-2' }}
-        </span>
-      </div>
-      <p class="delete-confirmation__warning">
-        Esta acción no se puede deshacer.
+        ¿Eliminar movimiento?
       </p>
     </div>
   </div>
   <div slot="footer" class="modal__footer-buttons">
-    <button 
-      class="btn btn--outline" 
-      (click)="closeDeleteModal()"
-    >
-      Cancelar
-    </button>
-    <button 
-      class="btn btn--primary delete-btn" 
-      (click)="confirmDelete()"
-    >
-      Eliminar
-    </button>
+    <button class="btn btn--outline" (click)="closeDeleteModal()">Cancelar</button>
+    <button class="btn btn--primary delete-btn" (click)="confirmDelete()">Eliminar</button>
   </div>
 </app-modal>

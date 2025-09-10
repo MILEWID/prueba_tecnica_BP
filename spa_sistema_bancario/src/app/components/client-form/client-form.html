@@ -65,9 +65,9 @@
         [class.form-input--error]="isFieldInvalid('genero')"
       >
         <option value="">Seleccionar...</option>
-        <option value="M">Masculino</option>
-        <option value="F">Femenino</option>
-        <option value="Otro">Otro</option>
+        <option value="MASCULINO">Masculino</option>
+        <option value="FEMENINO">Femenino</option>
+        <option value="OTRO">Otro</option>
       </select>
       <div *ngIf="isFieldInvalid('genero')" class="form-error">
         {{ getFieldError('genero') }}

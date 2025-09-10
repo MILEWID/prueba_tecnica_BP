@@ -50,8 +50,8 @@
         [class.form-input--error]="isFieldInvalid('tipoCuenta')"
       >
         <option value="">Seleccionar...</option>
-        <option value="Ahorros">Ahorros</option>
-        <option value="Corriente">Corriente</option>
+        <option value="AHORROS">Ahorros</option>
+        <option value="CORRIENTE">Corriente</option>
       </select>
       <div *ngIf="isFieldInvalid('tipoCuenta')" class="form-error">
         {{ getFieldError('tipoCuenta') }}

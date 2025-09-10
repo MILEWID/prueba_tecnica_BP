@@ -13,12 +13,15 @@ export interface Movimiento {
 export interface MovimientoDTO {
   id?: string;
   fecha: Date;
-  cliente: string;
-  numeroCuenta: string;
+  cuenta: {
+    numeroCuenta: string;
+    clienteNombre: string;
+    clienteIdentificacion: string;
+  };
   saldoInicial: number;
+  valor: number;
+  saldo: number;
   estado: boolean;
-  movimiento: number;
-  saldoDisponible: number;
 }
 
 export interface MovimientoRequest {

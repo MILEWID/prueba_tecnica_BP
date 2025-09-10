@@ -1,4 +1,4 @@
-/* Report filters section */
+
 .report-filters {
   background: #f8fafc;
   border: 1px solid #e2e8f0;
@@ -86,7 +86,7 @@
   }
 }
 
-/* Report header - consistente con el sistema */
+
 .report-header {
   background: white;
   border: 1px solid #e5e7eb;
@@ -111,18 +111,18 @@
   }
 }
 
-/* Report sections */
+
 .report-section {
   margin-bottom: 2.5rem;
 
-  /* Alineación de títulos con contenido */
+
   .section-title {
     margin-left: 0 !important;
     margin-right: 0 !important;
     text-align: left;
   }
 
-  /* Usar el mismo estilo que card__title para consistencia */
+
   .card__title {
     font-size: 1.5rem;
     font-weight: 700;
@@ -188,7 +188,7 @@
   }
 }
 
-/* Estilos específicos para títulos de secciones de reportes */
+
 .report-section .section-title {
   font-size: 1.25rem !important;
   font-weight: 600 !important;
@@ -200,7 +200,7 @@
   border-radius: 0 !important;
 }
 
-/* Tarjetas de resumen - estilo consistente del sistema */
+
 .report-summary {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -300,7 +300,6 @@
   }
 }
 
-/* Tabla de movimientos - estilo consistente del sistema */
 .enhanced-table {
   background: white;
   border: 1px solid #e5e7eb;
@@ -401,7 +400,7 @@
   font-size: 1rem;
 }
 
-/* Responsive improvements for reports */
+
 @media (max-width: 1024px) {
   .report-summary {
     grid-template-columns: 1fr;
@@ -463,7 +462,6 @@
   }
 }
 
-/* Print styles */
 @media print {
   .filter-actions,
   .alert {
@@ -519,7 +517,7 @@
   }
 }
 
-/* Loading state for reports */
+
 .loading {
   text-align: center;
   padding: 3rem;
@@ -541,7 +539,7 @@
   }
 }
 
-/* Button spinner */
+
 .btn-spinner {
   display: inline-block;
   width: 16px;
@@ -553,13 +551,13 @@
   margin-right: 0.5rem;
 }
 
-/* Required field indicator */
+
 .form-required {
   color: #dc2626;
   font-weight: 600;
 }
 
-/* Botón PDF azul marino */
+
 .btn--navy {
   background: #1f2937;
   color: white;

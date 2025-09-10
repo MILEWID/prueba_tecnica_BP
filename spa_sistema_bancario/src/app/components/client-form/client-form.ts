@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angu
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Client, ClientRequest } from '../../models/client.interface';
-import { ClientService } from '../../services/client';
+import { ClientService } from '../../services/client.service';
 @Component({
   selector: 'app-client-form',
   standalone: true,
@@ -37,9 +37,9 @@ export class ClientForm implements OnInit, OnChanges {
     this.clientForm = this.fb.group({
       identificacion: ['', [
         Validators.required,
-        Validators.minLength(8),
-        Validators.maxLength(15),
-        Validators.pattern(/^[0-9]+$/)
+        Validators.minLength(10),
+        Validators.maxLength(10),
+        Validators.pattern(/^[0-9]{10}$/)
       ]],
       nombre: ['', [
         Validators.required,
@@ -62,9 +62,7 @@ export class ClientForm implements OnInit, OnChanges {
       ]],
       telefono: ['', [
         Validators.required,
-        Validators.pattern(/^[0-9+\-\s()]+$/),
-        Validators.minLength(7),
-        Validators.maxLength(15)
+        Validators.pattern(/^[0-9]{9,10}$/)
       ]],
       contrasena: ['', [
         Validators.required,
@@ -99,7 +97,17 @@ export class ClientForm implements OnInit, OnChanges {
   onSubmit() {
     if (this.clientForm.valid && !this.isSubmitting) {
       this.isSubmitting = true;
-      const formData: ClientRequest = this.clientForm.value;
+      const raw = this.clientForm.value;
+      const formData: ClientRequest = {
+        identificacion: raw.identificacion,
+        nombre: raw.nombre,
+        genero: raw.genero,
+        edad: raw.edad,
+        direccion: raw.direccion,
+        telefono: raw.telefono,
+        contrasena: raw.contrasena,
+        estado: raw.estado
+      };
       this.formSubmit.emit(formData);
     } else {
       this.markFormGroupTouched();
